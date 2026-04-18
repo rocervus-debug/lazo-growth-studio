@@ -1600,6 +1600,339 @@
         section, nav, .btn, .project-card {
             will-change: auto;
         }
+
+        /* ============================================
+           LOGOS BAR (after hero)
+           ============================================ */
+        .logos-bar {
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 2.5rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .logos-bar-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .logos-bar-items {
+            display: flex;
+            align-items: center;
+            gap: 3.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .logo-item {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .logo-item:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .logo-item-separator {
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+        }
+
+        /* ============================================
+           ABOUT / FOUNDER SECTION
+           ============================================ */
+        .about {
+            background: var(--color-black);
+            padding: 8rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+        }
+
+        .about-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(108, 117, 72, 0.3), rgba(108, 117, 72, 0.1));
+            border: 2px solid rgba(108, 117, 72, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-olive);
+        }
+
+        .about-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-role {
+            color: var(--color-olive);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .about-text p {
+            color: #b4b4b4;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            .about-avatar {
+                margin: 0 auto;
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+            .about-text p {
+                max-width: 100%;
+            }
+        }
+
+        /* ============================================
+           TESTIMONIALS SECTION
+           ============================================ */
+        .testimonials {
+            background: var(--color-off-white);
+            padding: 6rem 5%;
+        }
+
+        .testimonials .section-header h2 {
+            color: #0a0a0a;
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            color: rgba(108, 117, 72, 0.15);
+            line-height: 1;
+        }
+
+        .testimonial-quote {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-olive), rgba(108, 117, 72, 0.5));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .testimonial-info strong {
+            display: block;
+            font-size: 0.9rem;
+            color: #0a0a0a;
+        }
+
+        .testimonial-info span {
+            font-size: 0.8rem;
+            color: var(--color-olive);
+        }
+
+        /* ============================================
+           CONTACT FORM
+           ============================================ */
+        .contact-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            opacity: 0;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #666;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--color-olive);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-form .btn {
+            align-self: center;
+            margin-top: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            opacity: 0;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            border: 2px solid #25d366;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1fb855;
+            border-color: #1fb855;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(37, 211, 102, 0.3);
+        }
+
+        /* ============================================
+           FLOATING WHATSAPP BUTTON
+           ============================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 800;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-4px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-float svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        .whatsapp-float .tooltip {
+            position: absolute;
+            right: 70px;
+            background: #1a1a1a;
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .whatsapp-float:hover .tooltip {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -1636,6 +1969,7 @@
             <li><a href="#process">Proceso</a></li>
             <li><a href="#services">Servicios</a></li>
             <li><a href="#projects">Proyectos</a></li>
+            <li><a href="#about">Nosotros</a></li>
             <li><a href="#contact">Contacto</a></li>
         </ul>
     </nav>
@@ -1655,6 +1989,18 @@
             <div class="scroll-indicator-text">Explora</div>
         </div>
     </section>
+
+    <!-- LOGOS BAR -->
+    <div class="logos-bar">
+        <span class="logos-bar-label">Proyectos Desarrollados</span>
+        <div class="logos-bar-items">
+            <span class="logo-item">VOLTOGEN</span>
+            <span class="logo-item-separator"></span>
+            <span class="logo-item">FRWD</span>
+            <span class="logo-item-separator"></span>
+            <span class="logo-item">ORIGIN</span>
+        </div>
+    </div>
 
     <!-- MANIFESTO SECTION -->
     <section class="manifesto grid-bg">
@@ -1897,13 +2243,78 @@
         </div>
     </section>
 
-    <!-- CTA SECTION -->
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">Llegué con la idea de una empresa solar y salí con un negocio estructurado, pitch deck profesional y un plan que los inversionistas tomaron en serio desde el día uno.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">DL</div>
+                    <div class="testimonial-info">
+                        <strong>Daniel López</strong>
+                        <span>Fundador, Voltogen Energy Systems</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">No solo nos crearon la marca — construyeron todo el concepto de negocio. Nombre, identidad, modelo financiero. FRWD no existiría sin LAZO.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MR</div>
+                    <div class="testimonial-info">
+                        <strong>Marcos Ruiz</strong>
+                        <span>Co-fundador, FRWD Fitness</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">Teníamos el espacio en el club de pádel pero cero idea de cómo convertirlo en negocio. LAZO diseñó ORIGIN de cero: concepto, renders, plan operativo. Hoy es realidad.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AC</div>
+                    <div class="testimonial-info">
+                        <strong>Andrés Contreras</strong>
+                        <span>Director, ORIGIN Gym Boutique</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT / FOUNDER SECTION -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-avatar">RM</div>
+            <div class="about-text">
+                <h2>Roy Martínez</h2>
+                <span class="about-role">Fundador & Director de Proyectos — LAZO Growth Studio</span>
+                <p>Emprendedor serial con experiencia construyendo negocios desde cero. No soy consultor — soy builder. He levantado proyectos en fitness, energía solar y retail, pasando de la idea a la operación real: branding, modelado financiero, pitch decks, fondeo y materialización. LAZO nació porque me di cuenta de que muchas ideas con potencial mueren por falta de estructura, no de ambición. Mi trabajo es convertir visión en algo que un inversionista firme y un mercado compre.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / CONTACT SECTION -->
     <section class="cta" id="contact">
         <div class="cta-content">
             <h2>Construyamos algo real.</h2>
-            <p>Todo gran negocio empieza con estructura.</p>
-            <a href="mailto:hello@lazogrowth.studio" class="btn btn-primary">Inicia Tu Proyecto →</a>
-            <p class="cta-email">o escríbenos a <a href="mailto:hello@lazogrowth.studio">hello@lazogrowth.studio</a></p>
+            <p>Todo gran negocio empieza con estructura. Cuéntanos tu idea.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/524613642990?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20LAZO%20Growth%20Studio" class="btn btn-whatsapp" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Agenda una llamada →
+                </a>
+                <a href="mailto:hello@lazogrowth.studio" class="btn btn-primary">Escríbenos por email →</a>
+            </div>
+            <form class="contact-form" action="https://formsubmit.co/hello@lazogrowth.studio" method="POST">
+                <input type="hidden" name="_subject" value="Nuevo proyecto desde LAZO Landing">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="name" placeholder="Tu nombre" required>
+                <input type="email" name="email" placeholder="Tu email" required>
+                <textarea name="message" placeholder="Cuéntanos brevemente sobre tu proyecto..." required></textarea>
+                <button type="submit" class="btn btn-primary">Enviar mensaje →</button>
+            </form>
+            <p class="cta-email">o escríbenos directo a <a href="mailto:hello@lazogrowth.studio">hello@lazogrowth.studio</a></p>
         </div>
     </section>
 
@@ -1918,6 +2329,7 @@
                 <a href="#process">Proceso</a>
                 <a href="#services">Servicios</a>
                 <a href="#projects">Proyectos</a>
+                <a href="#about">Nosotros</a>
                 <a href="#contact">Contacto</a>
             </div>
         </div>
@@ -1925,6 +2337,12 @@
             <p>&copy; 2026 LAZO Growth Studio. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/524613642990?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20LAZO" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="tooltip">¿Hablamos?</span>
+    </a>
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -2296,8 +2714,61 @@
             onEnter: () => {
                 gsap.to(ctaHeading, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' });
                 gsap.to(ctaParagraph, { opacity: 1, y: 0, duration: 0.8, delay: 0.1, ease: 'power2.out' });
-                gsap.to(ctaButton, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
-                gsap.to(ctaEmail, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: 'power2.out' });
+                const ctaButtons = document.querySelector('.cta-buttons');
+                const contactForm = document.querySelector('.contact-form');
+                if (ctaButtons) gsap.to(ctaButtons, { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
+                if (contactForm) gsap.to(contactForm, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: 'power2.out' });
+                gsap.to(ctaEmail, { opacity: 1, y: 0, duration: 0.8, delay: 0.4, ease: 'power2.out' });
+            }
+        });
+
+        /* ============================================
+           TESTIMONIALS ANIMATION
+           ============================================ */
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        testimonialCards.forEach(card => {
+            gsap.set(card, { opacity: 0, y: 40 });
+        });
+        ScrollTrigger.create({
+            trigger: '.testimonials',
+            start: 'top center+=100px',
+            onEnter: () => {
+                testimonialCards.forEach((card, i) => {
+                    gsap.to(card, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.15, ease: 'power2.out' });
+                });
+            }
+        });
+
+        /* ============================================
+           ABOUT SECTION ANIMATION
+           ============================================ */
+        const aboutAvatar = document.querySelector('.about-avatar');
+        const aboutText = document.querySelector('.about-text');
+        if (aboutAvatar && aboutText) {
+            gsap.set(aboutAvatar, { opacity: 0, scale: 0.8 });
+            gsap.set(aboutText, { opacity: 0, x: 40 });
+            ScrollTrigger.create({
+                trigger: '.about',
+                start: 'top center+=100px',
+                onEnter: () => {
+                    gsap.to(aboutAvatar, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' });
+                    gsap.to(aboutText, { opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' });
+                }
+            });
+        }
+
+        /* ============================================
+           LOGOS BAR ANIMATION
+           ============================================ */
+        const logoItems = document.querySelectorAll('.logo-item');
+        logoItems.forEach(item => gsap.set(item, { opacity: 0, y: 20 }));
+        ScrollTrigger.create({
+            trigger: '.logos-bar',
+            start: 'top center+=200px',
+            onEnter: () => {
+                logoItems.forEach((item, i) => {
+                    gsap.to(item, { opacity: 1, y: 0, duration: 0.5, delay: i * 0.1, ease: 'power2.out' });
+                });
             }
         });
 
