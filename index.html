@@ -170,22 +170,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             z-index: 10000;
             opacity: 1;
             pointer-events: all;
-            animation: fallbackHide 3.5s forwards;
-        }
-
-        @keyframes fallbackHide {
-            0%, 90% { opacity: 1; visibility: visible; }
-            100% { opacity: 0; visibility: hidden; }
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .preloader.hidden {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            animation: none;
+        }
+
+        .preloader-scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            color: rgba(255,255,255,0.35);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            animation: preloaderPulse 2s ease-in-out infinite;
+            animation-delay: 1.2s;
+            opacity: 0;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 0.7; transform: translateY(-6px); }
         }
 
         .preloader-content {
@@ -1933,6 +1944,196 @@
         .whatsapp-float:hover .tooltip {
             opacity: 1;
         }
+
+        /* ============================================
+           THEME TOGGLE (DARK/LIGHT)
+           ============================================ */
+        .theme-toggle {
+            position: fixed;
+            top: 1.2rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.1);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle .icon-sun { display: none; }
+        .theme-toggle .icon-moon { display: block; color: #fff; }
+
+        /* ---- LIGHT MODE OVERRIDES ---- */
+        body.light-mode {
+            background: #f5f5f0;
+            color: #555;
+        }
+
+        body.light-mode::after {
+            opacity: 0.15;
+        }
+
+        body.light-mode #bg-canvas {
+            opacity: 0.3;
+        }
+
+        body.light-mode .floating-blob { opacity: 0.5; }
+
+        body.light-mode nav {
+            background: rgba(245, 245, 240, 0.9);
+            border-bottom-color: rgba(0,0,0,0.08);
+        }
+
+        body.light-mode .nav-links a { color: #333; }
+        body.light-mode .logo { color: #0a0a0a; }
+
+        body.light-mode .hero-content h1,
+        body.light-mode .manifesto-line,
+        body.light-mode .process .section-header h2,
+        body.light-mode .stats .stat-number,
+        body.light-mode .cta h2,
+        body.light-mode .about-text h2,
+        body.light-mode .timeline-content h3,
+        body.light-mode .project-content h3,
+        body.light-mode .audience h2,
+        body.light-mode .section-header h2 {
+            color: #0a0a0a;
+        }
+
+        body.light-mode .hero-subtitle,
+        body.light-mode .manifesto-line,
+        body.light-mode .timeline-content p,
+        body.light-mode .about-text p,
+        body.light-mode .cta > p,
+        body.light-mode .stat-label,
+        body.light-mode .audience-card p {
+            color: #666;
+        }
+
+        body.light-mode .highlight { color: var(--color-olive); }
+
+        body.light-mode .hero,
+        body.light-mode .manifesto,
+        body.light-mode .process,
+        body.light-mode .stats,
+        body.light-mode .audience,
+        body.light-mode .about,
+        body.light-mode .cta {
+            background: #f5f5f0;
+        }
+
+        body.light-mode .logos-bar {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        body.light-mode .logo-item { color: rgba(0,0,0,0.35); }
+        body.light-mode .logo-item:hover { color: rgba(0,0,0,0.7); }
+
+        body.light-mode .audience-card {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        body.light-mode .audience-card h3 { color: #0a0a0a; }
+        body.light-mode .audience-icon { color: var(--color-olive); }
+
+        body.light-mode .timeline-dot {
+            background: #f5f5f0;
+        }
+
+        body.light-mode .stat-item {
+            background: rgba(0,0,0,0.03);
+            border-color: rgba(0,0,0,0.08);
+        }
+
+        body.light-mode .contact-form input,
+        body.light-mode .contact-form textarea {
+            background: rgba(0,0,0,0.04);
+            border-color: rgba(0,0,0,0.12);
+            color: #0a0a0a;
+        }
+
+        body.light-mode .contact-form input::placeholder,
+        body.light-mode .contact-form textarea::placeholder {
+            color: #999;
+        }
+
+        body.light-mode footer {
+            background: #0a0a0a;
+        }
+
+        body.light-mode .theme-toggle {
+            background: rgba(0,0,0,0.06);
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        body.light-mode .theme-toggle .icon-sun { display: block; color: #333; }
+        body.light-mode .theme-toggle .icon-moon { display: none; }
+
+        body.light-mode .whatsapp-float .tooltip {
+            background: #333;
+        }
+
+        body.light-mode .scroll-progress {
+            background: var(--color-olive);
+        }
+
+        body.light-mode .project-card {
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        /* ============================================
+           PROCESS VISUAL UPGRADE — ICON LABELS
+           ============================================ */
+        .timeline-dot svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--color-olive);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .timeline-step-number {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 28px;
+            height: 28px;
+            background: var(--color-olive);
+            color: #fff;
+            border-radius: 50%;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           STAT COUNTUP STYLING
+           ============================================ */
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 </head>
 <body>
@@ -1954,10 +2155,17 @@
                 <span class="preloader-letter">O</span>
             </div>
         </div>
+        <span class="preloader-scroll-hint">Desliza para explorar ↓</span>
     </div>
 
     <!-- CUSTOM CURSOR -->
     <div class="cursor"></div>
+
+    <!-- THEME TOGGLE -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
 
     <!-- SCROLL PROGRESS BAR -->
     <div class="scroll-progress"></div>
@@ -2064,35 +2272,50 @@
         </div>
         <div class="timeline">
             <div class="timeline-step">
-                <div class="timeline-dot">1</div>
+                <div class="timeline-dot">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <span class="timeline-step-number">1</span>
+                </div>
                 <div class="timeline-content">
                     <h3>DESCUBRIMIENTO</h3>
                     <p>Entendemos tu idea, mercado y ambición. Hacemos las preguntas difíciles.</p>
                 </div>
             </div>
             <div class="timeline-step">
-                <div class="timeline-dot">2</div>
+                <div class="timeline-dot">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    <span class="timeline-step-number">2</span>
+                </div>
                 <div class="timeline-content">
                     <h3>ESTRUCTURACIÓN</h3>
                     <p>Diseñamos la arquitectura del modelo de negocio y las operaciones. Definimos cómo funciona realmente.</p>
                 </div>
             </div>
             <div class="timeline-step">
-                <div class="timeline-dot">3</div>
+                <div class="timeline-dot">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    <span class="timeline-step-number">3</span>
+                </div>
                 <div class="timeline-content">
                     <h3>VALIDACIÓN FINANCIERA</h3>
                     <p>Construimos los números que prueban la viabilidad. Ingresos, costos, márgenes, unit economics.</p>
                 </div>
             </div>
             <div class="timeline-step">
-                <div class="timeline-dot">4</div>
+                <div class="timeline-dot">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                    <span class="timeline-step-number">4</span>
+                </div>
                 <div class="timeline-content">
                     <h3>LISTO PARA INVERSIÓN</h3>
                     <p>Empaquetamos todo para los tomadores de decisiones. Pitch deck, modelo, resumen, data room.</p>
                 </div>
             </div>
             <div class="timeline-step">
-                <div class="timeline-dot">5</div>
+                <div class="timeline-dot">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="timeline-step-number">5</span>
+                </div>
                 <div class="timeline-content">
                     <h3>EJECUCIÓN</h3>
                     <p>Creamos el roadmap para hacerlo realidad. Hitos, recursos, tiempos, riesgos.</p>
@@ -2106,19 +2329,19 @@
         <canvas class="stats-canvas" id="flowCanvas"></canvas>
         <div class="stats-grid">
             <div class="stat-item">
-                <div class="stat-number">3</div>
+                <div class="stat-number" data-target="3" data-suffix="">0</div>
                 <div class="stat-label">industrias diferentes</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">3</div>
+                <div class="stat-number" data-target="3" data-suffix="">0</div>
                 <div class="stat-label">proyectos creados desde cero</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">100%</div>
+                <div class="stat-number" data-target="100" data-suffix="%">0%</div>
                 <div class="stat-label">de concepto a realidad</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">0</div>
+                <div class="stat-number" data-target="0" data-suffix="">0</div>
                 <div class="stat-label">templates — todo a la medida</div>
             </div>
         </div>
@@ -2455,21 +2678,40 @@
         });
 
         /* ============================================
-           PRELOADER ANIMATION - FIXED BUG
+           PRELOADER — SCROLL TO DISMISS
            ============================================ */
-        window.addEventListener('load', () => {
+        (function() {
             const preloader = document.querySelector('.preloader');
-            gsap.to(preloader, {
-                opacity: 0,
-                duration: 0.8,
-                delay: 1.5,
-                ease: 'power2.inOut',
-                onComplete: () => {
-                    preloader.classList.add('hidden');
-                    ScrollTrigger.refresh();
-                }
-            });
-        });
+            let preloaderDismissed = false;
+
+            function dismissPreloader() {
+                if (preloaderDismissed) return;
+                preloaderDismissed = true;
+                preloader.classList.add('hidden');
+                document.body.style.overflow = '';
+                setTimeout(() => ScrollTrigger.refresh(), 900);
+                window.removeEventListener('wheel', dismissPreloader);
+                window.removeEventListener('touchmove', dismissPreloader);
+                window.removeEventListener('keydown', handleKeyDismiss);
+            }
+
+            function handleKeyDismiss(e) {
+                if (e.key === 'ArrowDown' || e.key === ' ') dismissPreloader();
+            }
+
+            // Block scroll while preloader is visible
+            document.body.style.overflow = 'hidden';
+
+            // Wait for letters to animate in, then listen for scroll
+            setTimeout(() => {
+                window.addEventListener('wheel', dismissPreloader, { passive: true });
+                window.addEventListener('touchmove', dismissPreloader, { passive: true });
+                window.addEventListener('keydown', handleKeyDismiss);
+            }, 800);
+
+            // Fallback: auto-dismiss after 8s if user doesn't scroll
+            setTimeout(() => dismissPreloader(), 8000);
+        })();
 
         /* ============================================
            HERO HEADLINE ANIMATION
@@ -2986,6 +3228,55 @@
         resizeFlowCanvas();
         drawFlowLines(0);
         window.addEventListener('resize', resizeFlowCanvas);
+
+        /* ============================================
+           STAT COUNTUP ANIMATION
+           ============================================ */
+        const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+        let statsAnimated = false;
+
+        function animateCountUp() {
+            if (statsAnimated) return;
+            statsAnimated = true;
+            statNumbers.forEach(el => {
+                const target = parseInt(el.dataset.target);
+                const suffix = el.dataset.suffix || '';
+                if (target === 0) {
+                    el.textContent = '0' + suffix;
+                    return;
+                }
+                const duration = 1500;
+                const startTime = performance.now();
+                function update(now) {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.round(eased * target);
+                    el.textContent = current + suffix;
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+                requestAnimationFrame(update);
+            });
+        }
+
+        ScrollTrigger.create({
+            trigger: '.stats',
+            start: 'top center+=100px',
+            onEnter: animateCountUp
+        });
+
+        /* ============================================
+           THEME TOGGLE (DARK / LIGHT)
+           ============================================ */
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('lazo-theme');
+        if (savedTheme === 'light') document.body.classList.add('light-mode');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('lazo-theme', isLight ? 'light' : 'dark');
+        });
     </script>
 </body>
 </html>
