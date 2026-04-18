@@ -2161,18 +2161,36 @@
     (function(){
         var p = document.getElementById('preloader');
         var done = false;
+
+        // Block real scrolling while preloader visible
+        function onWheel(e){
+            if(!done){ e.preventDefault(); go(); }
+        }
+        function onTouch(e){
+            if(!done){ e.preventDefault(); go(); }
+        }
+        function onKey(e){
+            if(!done && (e.key==='ArrowDown'||e.key===' ')){ go(); }
+        }
+        document.addEventListener('wheel', onWheel, {passive:false});
+        document.addEventListener('touchmove', onTouch, {passive:false});
+        document.addEventListener('keydown', onKey);
+        p.addEventListener('click', function(){ go(); });
+
         function go(){
             if(done) return;
             done = true;
             p.classList.add('hidden');
-            setTimeout(function(){ p.style.display='none'; }, 900);
+            document.removeEventListener('wheel', onWheel);
+            document.removeEventListener('touchmove', onTouch);
+            document.removeEventListener('keydown', onKey);
+            window.scrollTo(0,0);
+            setTimeout(function(){
+                p.style.display='none';
+                if(window.ScrollTrigger) ScrollTrigger.refresh();
+            }, 900);
         }
         window._dismissPreloader = go;
-        document.addEventListener('wheel', go, true);
-        document.addEventListener('touchstart', go, true);
-        document.addEventListener('keydown', function(e){
-            if(e.key==='ArrowDown'||e.key===' ') go();
-        }, true);
         setTimeout(go, 6000);
     })();
     </script>
