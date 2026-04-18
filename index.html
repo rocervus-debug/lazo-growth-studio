@@ -67,45 +67,48 @@
         }
 
         .blob-1 {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(108, 117, 72, 0.06) 0%, transparent 70%);
-            top: 10%;
-            right: -5%;
-            animation: float-blob-1 25s ease-in-out infinite;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.07) 0%, transparent 70%);
+            top: 5%;
+            right: -10%;
+            animation: float-blob-1 30s ease-in-out infinite;
         }
 
         .blob-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(108, 117, 72, 0.04) 0%, transparent 70%);
-            bottom: 15%;
-            left: -10%;
-            animation: float-blob-2 20s ease-in-out infinite;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.05) 0%, transparent 70%);
+            bottom: 10%;
+            left: -15%;
+            animation: float-blob-2 25s ease-in-out infinite;
         }
 
         .blob-3 {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(108, 117, 72, 0.05) 0%, transparent 70%);
-            top: 50%;
-            right: 5%;
-            animation: float-blob-3 22s ease-in-out infinite;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.06) 0%, transparent 70%);
+            top: 45%;
+            right: 10%;
+            animation: float-blob-3 28s ease-in-out infinite;
         }
 
         @keyframes float-blob-1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(40px, -60px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -80px) scale(1.1); }
+            66% { transform: translate(-30px, 40px) scale(0.95); }
         }
 
         @keyframes float-blob-2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(80px, 40px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, 50px) scale(0.9); }
+            66% { transform: translate(-40px, -30px) scale(1.1); }
         }
 
         @keyframes float-blob-3 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-50px, 80px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-70px, 100px) scale(1.05); }
+            66% { transform: translate(50px, -60px) scale(0.92); }
         }
 
         /* ============================================
@@ -639,11 +642,16 @@
         }
 
         .manifesto.grid-bg {
-            background-image:
-                linear-gradient(rgba(108, 117, 72, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(108, 117, 72, 0.08) 1px, transparent 1px),
-                linear-gradient(135deg, #0a0a0a 0%, rgba(108, 117, 72, 0.15) 100%);
-            background-size: 60px 60px, 60px 60px, 100% 100%;
+            background-image: none;
+            background: linear-gradient(135deg, #0a0a0a 0%, rgba(108, 117, 72, 0.12) 50%, #0a0a0a 100%);
+            background-size: 200% 200%;
+            animation: manifestoGradient 12s ease-in-out infinite;
+        }
+
+        @keyframes manifestoGradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
         .manifesto::before {
@@ -818,10 +826,6 @@
            ============================================ */
         .process {
             background: var(--color-black);
-            background-image:
-                linear-gradient(rgba(108, 117, 72, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(108, 117, 72, 0.08) 1px, transparent 1px);
-            background-size: 60px 60px;
             padding: 8rem 5%;
             position: relative;
         }
@@ -907,46 +911,24 @@
         }
 
         /* ============================================
-           STATS SECTION
+           STATS SECTION — FLOW LINES
            ============================================ */
         .stats {
-            background: var(--color-olive);
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 60px 60px;
+            background: #0a0a0a;
             padding: 8rem 5%;
             color: #ffffff;
             position: relative;
             overflow: hidden;
         }
 
-        .stats::before {
-            content: '';
+        .stats-canvas {
             position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            filter: blur(120px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
-        }
-
-        .stats::after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
             pointer-events: none;
-            filter: blur(120px);
-            z-index: 0;
         }
 
         .stats-grid {
@@ -954,37 +936,64 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
+            gap: 3rem;
             text-align: center;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .stat-item {
             opacity: 0;
             position: relative;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem 2rem;
+            background: rgba(108, 117, 72, 0.06);
+            border-radius: 16px;
+            border: 1px solid rgba(108, 117, 72, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
         }
 
-        /* Progress bar behind stat */
+        .stat-item:hover {
+            border-color: rgba(108, 117, 72, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(108, 117, 72, 0.15), 0 0 60px rgba(108, 117, 72, 0.05);
+        }
+
+        /* Glowing bottom edge */
         .stat-item::before {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            animation: statFill 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            border-radius: 12px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-olive), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        @keyframes statFill {
-            from { width: 0%; }
-            to { width: 100%; }
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Subtle inner glow on hover */
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(108, 117, 72, 0.08) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .stat-item:hover::after {
+            opacity: 1;
         }
 
         .stat-number {
@@ -992,14 +1001,14 @@
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             margin-bottom: 1rem;
-            color: #ffffff;
+            color: var(--color-olive);
             position: relative;
             z-index: 1;
         }
 
         .stat-label {
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 500;
             position: relative;
             z-index: 1;
@@ -1246,10 +1255,6 @@
            ============================================ */
         .cta {
             background: var(--color-black);
-            background-image:
-                linear-gradient(rgba(108, 117, 72, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(108, 117, 72, 0.08) 1px, transparent 1px);
-            background-size: 60px 60px;
             padding: 10rem 5%;
             text-align: center;
             position: relative;
@@ -1735,6 +1740,7 @@
 
     <!-- STATS SECTION -->
     <section class="stats">
+        <canvas class="stats-canvas" id="flowCanvas"></canvas>
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="stat-number">$36M+</div>
@@ -1883,69 +1889,95 @@
         gsap.registerPlugin(ScrollTrigger);
 
         /* ============================================
-           PARTICLE GRID BACKGROUND ANIMATION
+           ORGANIC PARTICLE BACKGROUND
            ============================================ */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
         let mouseX = -1000, mouseY = -1000;
-        const dots = [];
-        const spacing = 60;
-        const baseRadius = 1.2;
-        const glowRadius = 3;
-        const interactionRadius = 150;
+        const particles = [];
+        const particleCount = 80;
+        const connectionDist = 160;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initDots();
+            if (particles.length === 0) initParticles();
         }
 
-        function initDots() {
-            dots.length = 0;
-            const cols = Math.ceil(canvas.width / spacing) + 1;
-            const rows = Math.ceil(canvas.height / spacing) + 1;
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    dots.push({
-                        x: c * spacing,
-                        y: r * spacing,
-                        baseOpacity: 0.12 + Math.random() * 0.06
-                    });
-                }
+        function initParticles() {
+            particles.length = 0;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    radius: 1 + Math.random() * 1.5,
+                    baseOpacity: 0.08 + Math.random() * 0.12,
+                    phase: Math.random() * Math.PI * 2
+                });
             }
         }
 
-        function drawDots(time) {
+        function drawParticles(time) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const scrollY = window.scrollY * 0.08;
+            const t = time * 0.001;
 
-            dots.forEach(dot => {
-                const dx = mouseX - dot.x;
-                const dy = mouseY - (dot.y - scrollY);
+            particles.forEach((p, i) => {
+                // Organic drift with sine waves
+                p.x += p.vx + Math.sin(t * 0.5 + p.phase) * 0.15;
+                p.y += p.vy + Math.cos(t * 0.3 + p.phase) * 0.1;
+
+                // Wrap around edges
+                if (p.x < -20) p.x = canvas.width + 20;
+                if (p.x > canvas.width + 20) p.x = -20;
+                if (p.y < -20) p.y = canvas.height + 20;
+                if (p.y > canvas.height + 20) p.y = -20;
+
+                // Mouse interaction — gentle repel
+                const dx = mouseX - p.x;
+                const dy = mouseY - p.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-
-                const pulse = Math.sin(time * 0.001 + dot.x * 0.01 + dot.y * 0.01) * 0.03;
-                let opacity = dot.baseOpacity + pulse;
-                let radius = baseRadius;
-
-                if (dist < interactionRadius) {
-                    const factor = 1 - (dist / interactionRadius);
-                    opacity = Math.min(0.7, opacity + factor * 0.5);
-                    radius = baseRadius + factor * (glowRadius - baseRadius);
+                if (dist < 200) {
+                    const force = (200 - dist) / 200 * 0.8;
+                    p.x -= (dx / dist) * force;
+                    p.y -= (dy / dist) * force;
                 }
 
+                // Breathing opacity
+                const breath = Math.sin(t + p.phase) * 0.04;
+                const opacity = p.baseOpacity + breath;
+
+                // Draw particle
                 ctx.beginPath();
-                ctx.arc(dot.x, dot.y - scrollY % spacing, radius, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(108, 117, 72, ${opacity})`;
                 ctx.fill();
+
+                // Draw connections to nearby particles
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const cdx = p.x - p2.x;
+                    const cdy = p.y - p2.y;
+                    const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+                    if (cdist < connectionDist) {
+                        const lineOpacity = (1 - cdist / connectionDist) * 0.06;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(108, 117, 72, ${lineOpacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
             });
 
-            requestAnimationFrame(drawDots);
+            requestAnimationFrame(drawParticles);
         }
 
         resizeCanvas();
-        drawDots(0);
+        drawParticles(0);
 
         window.addEventListener('resize', resizeCanvas);
         document.addEventListener('mousemove', (e) => {
@@ -2351,6 +2383,94 @@
                 }
             });
         });
+
+        /* ============================================
+           FLOW LINES CANVAS — STATS SECTION
+           ============================================ */
+        const flowCanvas = document.getElementById('flowCanvas');
+        const flowCtx = flowCanvas.getContext('2d');
+        const flowLines = [];
+        const numLines = 6;
+
+        function resizeFlowCanvas() {
+            const statsSection = document.querySelector('.stats');
+            flowCanvas.width = statsSection.offsetWidth;
+            flowCanvas.height = statsSection.offsetHeight;
+        }
+
+        // Create flowing curves
+        for (let i = 0; i < numLines; i++) {
+            flowLines.push({
+                yBase: (i + 1) / (numLines + 1),
+                amplitude: 20 + Math.random() * 40,
+                frequency: 0.003 + Math.random() * 0.004,
+                speed: 0.3 + Math.random() * 0.4,
+                phase: Math.random() * Math.PI * 2,
+                opacity: 0.06 + Math.random() * 0.08,
+                width: 1 + Math.random() * 1.5
+            });
+        }
+
+        function drawFlowLines(time) {
+            flowCtx.clearRect(0, 0, flowCanvas.width, flowCanvas.height);
+            const t = time * 0.001;
+            const w = flowCanvas.width;
+            const h = flowCanvas.height;
+
+            flowLines.forEach(line => {
+                flowCtx.beginPath();
+                flowCtx.strokeStyle = `rgba(108, 117, 72, ${line.opacity})`;
+                flowCtx.lineWidth = line.width;
+
+                for (let x = 0; x <= w; x += 3) {
+                    const progress = x / w;
+                    const wave1 = Math.sin(x * line.frequency + t * line.speed + line.phase) * line.amplitude;
+                    const wave2 = Math.sin(x * line.frequency * 0.5 + t * line.speed * 0.7 + line.phase * 2) * line.amplitude * 0.5;
+                    const y = h * line.yBase + wave1 + wave2;
+
+                    if (x === 0) {
+                        flowCtx.moveTo(x, y);
+                    } else {
+                        flowCtx.lineTo(x, y);
+                    }
+                }
+                flowCtx.stroke();
+
+                // Draw subtle energy nodes along the line
+                const nodeCount = 3;
+                for (let n = 0; n < nodeCount; n++) {
+                    const nx = ((t * line.speed * 30 + n * (w / nodeCount) + line.phase * 100) % (w + 40)) - 20;
+                    const wave1 = Math.sin(nx * line.frequency + t * line.speed + line.phase) * line.amplitude;
+                    const wave2 = Math.sin(nx * line.frequency * 0.5 + t * line.speed * 0.7 + line.phase * 2) * line.amplitude * 0.5;
+                    const ny = h * line.yBase + wave1 + wave2;
+
+                    const pulse = (Math.sin(t * 2 + n + line.phase) + 1) / 2;
+                    const nodeRadius = 2 + pulse * 3;
+                    const nodeOpacity = 0.1 + pulse * 0.15;
+
+                    // Glow
+                    const gradient = flowCtx.createRadialGradient(nx, ny, 0, nx, ny, nodeRadius * 4);
+                    gradient.addColorStop(0, `rgba(108, 117, 72, ${nodeOpacity})`);
+                    gradient.addColorStop(1, 'rgba(108, 117, 72, 0)');
+                    flowCtx.fillStyle = gradient;
+                    flowCtx.beginPath();
+                    flowCtx.arc(nx, ny, nodeRadius * 4, 0, Math.PI * 2);
+                    flowCtx.fill();
+
+                    // Core dot
+                    flowCtx.fillStyle = `rgba(108, 117, 72, ${nodeOpacity + 0.2})`;
+                    flowCtx.beginPath();
+                    flowCtx.arc(nx, ny, nodeRadius, 0, Math.PI * 2);
+                    flowCtx.fill();
+                }
+            });
+
+            requestAnimationFrame(drawFlowLines);
+        }
+
+        resizeFlowCanvas();
+        drawFlowLines(0);
+        window.addEventListener('resize', resizeFlowCanvas);
     </script>
 </body>
 </html>
