@@ -1119,45 +1119,37 @@
             pointer-events: none;
         }
 
-        .project-card-sierra::before {
+        /* Voltogen — solar energy amber/orange tones */
+        .project-card-voltogen {
+            background: linear-gradient(135deg, #1a1400 0%, #2a1f00 50%, #1a1a1a 100%);
+        }
+        .project-card-voltogen::before {
             background:
-                linear-gradient(135deg,
-                    transparent 0%,
-                    rgba(0, 0, 0, 0.3) 100%),
-                linear-gradient(45deg, #2a2a2a 25%, transparent 25%, transparent 50%, #2a2a2a 50%, #2a2a2a 75%, transparent 75%, transparent),
-                conic-gradient(from 45deg at 30% 30%, #6c7548 0deg, #3a4028 180deg, #6c7548 360deg);
-            background-size: 100% 100%, 80px 80px, 100% 100%;
-            background-position: 0 0, 0 0, 0 0;
+                linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%),
+                radial-gradient(circle at 70% 30%, rgba(255, 165, 0, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.08) 0%, transparent 50%);
         }
 
-        .project-card-fitlab::before {
+        /* FRWD — bold dark with olive accent */
+        .project-card-frwd {
+            background: linear-gradient(135deg, #111111 0%, #1e1e1e 50%, #0d0d0d 100%);
+        }
+        .project-card-frwd::before {
             background:
-                linear-gradient(135deg,
-                    transparent 0%,
-                    rgba(0, 0, 0, 0.3) 100%),
-                repeating-linear-gradient(90deg, #6c7548, #6c7548 10px, #3a4028 10px, #3a4028 20px),
-                repeating-linear-gradient(0deg, #6c7548, #6c7548 10px, #3a4028 10px, #3a4028 20px);
-            background-size: 100% 100%, 100% 100%, 100% 100%;
-            background-position: 0 0, 0 0, 0 0;
-            clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+                linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%),
+                radial-gradient(circle at 60% 40%, rgba(108, 117, 72, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
         }
 
-        .project-card-mercado::before {
+        /* ORIGIN — warm earth tones (matching their beige/brown deck) */
+        .project-card-origin {
+            background: linear-gradient(135deg, #1a1610 0%, #2a2318 50%, #1a1a1a 100%);
+        }
+        .project-card-origin::before {
             background:
-                linear-gradient(135deg,
-                    transparent 0%,
-                    rgba(0, 0, 0, 0.3) 100%),
-                repeating-linear-gradient(0deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(108, 117, 72, 0.3) 20px,
-                    rgba(108, 117, 72, 0.3) 40px),
-                repeating-linear-gradient(90deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(108, 117, 72, 0.3) 20px,
-                    rgba(108, 117, 72, 0.3) 40px);
-            background-size: 100% 100%, 100% 100%, 100% 100%;
+                linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%),
+                radial-gradient(circle at 50% 30%, rgba(180, 150, 100, 0.1) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(108, 117, 72, 0.08) 0%, transparent 50%);
         }
 
         .project-content {
@@ -1228,15 +1220,16 @@
         }
 
         .audience-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--color-olive), rgba(108, 117, 72, 0.6));
-            border-radius: 4px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(108, 117, 72, 0.15), rgba(108, 117, 72, 0.05));
+            border: 1px solid rgba(108, 117, 72, 0.25);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 2rem;
-            font-size: 1.8rem;
+            color: var(--color-olive);
         }
 
         .audience-card h3 {
@@ -1743,20 +1736,20 @@
         <canvas class="stats-canvas" id="flowCanvas"></canvas>
         <div class="stats-grid">
             <div class="stat-item">
-                <div class="stat-number">$36M+</div>
-                <div class="stat-label">en proyectos estructurados</div>
+                <div class="stat-number">3</div>
+                <div class="stat-label">industrias diferentes</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">negocios construidos</div>
+                <div class="stat-number">3</div>
+                <div class="stat-label">proyectos creados desde cero</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">3x</div>
-                <div class="stat-label">ROI promedio del inversionista</div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">de concepto a realidad</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">6 semanas</div>
-                <div class="stat-label">de idea a listo para inversión</div>
+                <div class="stat-number">0</div>
+                <div class="stat-label">templates — todo a la medida</div>
             </div>
         </div>
     </section>
@@ -1764,34 +1757,34 @@
     <!-- SOCIAL PROOF MARQUEE -->
     <section class="social-proof">
         <div class="proof-marquee">
-            <span class="proof-item">+$36M MXN en proyectos estructurados</span>
+            <span class="proof-item">Voltogen Energy Systems</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">15+ negocios construidos</span>
+            <span class="proof-item">FRWD Fitness Studio</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Bienes raíces</span>
+            <span class="proof-item">ORIGIN Fitness Center</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Fitness & Wellness</span>
+            <span class="proof-item">Energía Solar</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Plataformas digitales</span>
+            <span class="proof-item">Fitness Premium</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Listos para inversión</span>
+            <span class="proof-item">Gym Boutique</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Enfocados en ROI</span>
+            <span class="proof-item">De idea a negocio real</span>
             <span class="proof-separator">·</span>
             <!-- Clone for seamless loop -->
-            <span class="proof-item proof-marquee--clone">+$36M MXN en proyectos estructurados</span>
+            <span class="proof-item proof-marquee--clone">Voltogen Energy Systems</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">15+ negocios construidos</span>
+            <span class="proof-item">FRWD Fitness Studio</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Bienes raíces</span>
+            <span class="proof-item">ORIGIN Fitness Center</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Fitness & Wellness</span>
+            <span class="proof-item">Energía Solar</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Plataformas digitales</span>
+            <span class="proof-item">Fitness Premium</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Listos para inversión</span>
+            <span class="proof-item">Gym Boutique</span>
             <span class="proof-separator">·</span>
-            <span class="proof-item">Enfocados en ROI</span>
+            <span class="proof-item">De idea a negocio real</span>
         </div>
     </section>
 
@@ -1801,25 +1794,25 @@
             <h2>Lo Que Estamos Construyendo</h2>
         </div>
         <div class="projects-scroll">
-            <div class="project-card project-card-sierra">
+            <div class="project-card project-card-voltogen">
                 <div class="project-content">
-                    <span class="project-tag">Bienes Raíces</span>
-                    <h3>SIERRA ALTA</h3>
-                    <p>Desarrollo boutique de cabañas de montaña. Estructurado para ronda de inversión de $21M MXN. Modelo financiero completo + roadmap de ejecución entregados.</p>
+                    <span class="project-tag">Energía Solar</span>
+                    <h3>VOLTOGEN</h3>
+                    <p>Empresa de venta, instalación y mantenimiento de paneles solares. Creamos branding completo, estrategia de mercado y posicionamiento para sector residencial, comercial e industrial.</p>
                 </div>
             </div>
-            <div class="project-card project-card-fitlab">
+            <div class="project-card project-card-frwd">
                 <div class="project-content">
-                    <span class="project-tag">Fitness & Wellness</span>
-                    <h3>FITLAB</h3>
-                    <p>Concepto de estudio fitness urbano. Modelo listo para franquicia con proyecciones a 3 años. Punto de equilibrio en mes 14. Pitch deck cerró $9M MXN en semilla.</p>
+                    <span class="project-tag">Fitness Premium</span>
+                    <h3>FRWD</h3>
+                    <p>Estudio fitness de alta gama enfocado en resistencia y fuerza. Creado desde cero: nombre, branding, concepto de negocio. Fondeado y materializado.</p>
                 </div>
             </div>
-            <div class="project-card project-card-mercado">
+            <div class="project-card project-card-origin">
                 <div class="project-content">
-                    <span class="project-tag">Plataforma Digital</span>
-                    <h3>MERCADO DIGITAL</h3>
-                    <p>Plataforma marketplace B2B. Modelo de negocio SaaS con $810 MXN de CAC y ratio LTV de 8.2x. Roadmap de ejecución para MVP en 90 días.</p>
+                    <span class="project-tag">Gym Boutique</span>
+                    <h3>ORIGIN</h3>
+                    <p>Ecosistema fitness híbrido dentro de un club de pádel. Gym boutique + estudio funcional creado desde cero: concepto, branding, business plan, renders y modelo operativo.</p>
                 </div>
             </div>
         </div>
@@ -1832,17 +1825,17 @@
         </div>
         <div class="audience-grid">
             <div class="audience-card">
-                <div class="audience-icon">💼</div>
+                <div class="audience-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
                 <h3>EMPRENDEDORES</h3>
                 <p>Tienes una idea y capital. Necesitas estructura, no consejos.</p>
             </div>
             <div class="audience-card">
-                <div class="audience-icon">📈</div>
+                <div class="audience-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
                 <h3>INVERSIONISTAS</h3>
                 <p>Necesitas proyectos validados y listos. Sin diamantes en bruto.</p>
             </div>
             <div class="audience-card">
-                <div class="audience-icon">🏢</div>
+                <div class="audience-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
                 <h3>DUEÑOS DE NEGOCIO</h3>
                 <p>Ya tienes algo funcionando. Necesitas escalar con un plan real.</p>
             </div>
@@ -2156,15 +2149,12 @@
            ============================================ */
         const statNumbers = document.querySelectorAll('.stat-number');
         statNumbers.forEach(stat => {
-            const finalText = stat.textContent;
+            const finalText = stat.textContent.trim();
             const numberMatch = finalText.match(/[\d.]+/);
 
             if (numberMatch) {
                 const finalNumber = parseFloat(numberMatch[0]);
                 const isPercentage = finalText.includes('%');
-                const isMoney = finalText.includes('$');
-                const isWeeks = finalText.includes('semanas');
-                const isMultiplier = finalText.includes('x');
 
                 ScrollTrigger.create({
                     trigger: stat,
@@ -2177,19 +2167,15 @@
 
                         gsap.to({ value: 0 }, {
                             value: finalNumber,
-                            duration: 2.5,
+                            duration: 2,
                             ease: 'power2.out',
                             onUpdate: function() {
                                 const current = Math.floor(this.targets()[0].value);
-                                let display = current.toString();
-
-                                if (isMoney) display = '$' + current + 'M+';
-                                else if (isPercentage) display = current + '%';
-                                else if (isMultiplier) display = current + 'x';
-                                else if (isWeeks) display = current + ' semanas';
-                                else display = current + '+';
-
-                                stat.textContent = display;
+                                if (isPercentage) {
+                                    stat.textContent = current + '%';
+                                } else {
+                                    stat.textContent = current;
+                                }
                             }
                         });
                     }
