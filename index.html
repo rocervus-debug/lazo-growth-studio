@@ -19,6 +19,7 @@
         html {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -1657,7 +1658,7 @@
                 <div class="service-content">
                     <h3>ESTRUCTURACIÓN DE PROYECTOS</h3>
                     <p>Arquitectura de modelo de negocio, diseño operativo y validación de mercado. Definimos cómo funciona tu negocio realmente.</p>
-                    <div class="service-price">$45,000 – $90,000 MXN</div>
+                    <div class="service-price">Cotización personalizada</div>
                 </div>
             </div>
             <div class="service-item shimmer-border">
@@ -1665,7 +1666,7 @@
                 <div class="service-content">
                     <h3>MODELADO FINANCIERO</h3>
                     <p>Proyecciones de ingresos, unit economics, análisis de punto de equilibrio y estructura de inversión. Los números que prueban tu proyecto.</p>
-                    <div class="service-price">$55,000 – $135,000 MXN</div>
+                    <div class="service-price">Cotización personalizada</div>
                 </div>
             </div>
             <div class="service-item shimmer-border">
@@ -1673,7 +1674,7 @@
                 <div class="service-content">
                     <h3>PAQUETE LISTO PARA INVERSIÓN</h3>
                     <p>Pitch deck, modelo financiero, resumen ejecutivo y data room. Todo lo que un inversionista necesita para decir sí.</p>
-                    <div class="service-price">$90,000 – $270,000 MXN</div>
+                    <div class="service-price">Cotización personalizada</div>
                 </div>
             </div>
             <div class="service-item shimmer-border">
@@ -1681,7 +1682,7 @@
                 <div class="service-content">
                     <h3>ROADMAP DE EJECUCIÓN</h3>
                     <p>Plan de lanzamiento fase por fase con hitos, asignación de recursos y mitigación de riesgos. Del plan a la realidad.</p>
-                    <div class="service-price">$36,000 – $72,000 MXN</div>
+                    <div class="service-price">Cotización personalizada</div>
                 </div>
             </div>
         </div>
@@ -1874,40 +1875,12 @@
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <script>
         /* ============================================
            REGISTER GSAP PLUGINS
            ============================================ */
         gsap.registerPlugin(ScrollTrigger);
-
-        /* ============================================
-           LENIS SMOOTH SCROLL
-           ============================================ */
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-            infinite: false,
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
-
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
 
         /* ============================================
            PARTICLE GRID BACKGROUND ANIMATION
@@ -2270,25 +2243,23 @@
            NAVIGATION HIDE/SHOW ON SCROLL
            ============================================ */
         const nav = document.querySelector('nav');
-        let lastScrollTop = 0;
-        let ticking = false;
+        let prevScrollY = 0;
+        let scrollDelta = 0;
+        const scrollThreshold = 8;
 
         window.addEventListener('scroll', () => {
-            lastScrollTop = window.scrollY;
+            const currentY = window.scrollY;
+            scrollDelta = currentY - prevScrollY;
 
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    if (lastScrollTop > 100) {
-                        if (window.scrollY > lastScrollTop) {
-                            nav.classList.add('hidden');
-                        } else {
-                            nav.classList.remove('hidden');
-                        }
-                    }
-                    ticking = false;
-                });
-                ticking = true;
+            if (currentY < 100) {
+                nav.classList.remove('hidden');
+            } else if (scrollDelta > scrollThreshold) {
+                nav.classList.add('hidden');
+            } else if (scrollDelta < -scrollThreshold) {
+                nav.classList.remove('hidden');
             }
+
+            prevScrollY = currentY;
         });
 
         /* ============================================
@@ -2350,7 +2321,8 @@
                 if (href !== '#' && document.querySelector(href)) {
                     e.preventDefault();
                     const target = document.querySelector(href);
-                    lenis.scrollTo(target, { offset: -100 });
+                    const y = target.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
                 }
             });
         });
