@@ -2678,39 +2678,36 @@
         });
 
         /* ============================================
-           PRELOADER — SCROLL TO DISMISS
+           PRELOADER — SCROLL / TOUCH / CLICK TO DISMISS
            ============================================ */
         (function() {
             const preloader = document.querySelector('.preloader');
             let preloaderDismissed = false;
+            const events = ['wheel', 'touchstart', 'mousedown', 'keydown'];
 
             function dismissPreloader() {
                 if (preloaderDismissed) return;
                 preloaderDismissed = true;
                 preloader.classList.add('hidden');
-                document.body.style.overflow = '';
-                setTimeout(() => ScrollTrigger.refresh(), 900);
-                window.removeEventListener('wheel', dismissPreloader);
-                window.removeEventListener('touchmove', dismissPreloader);
-                window.removeEventListener('keydown', handleKeyDismiss);
+                events.forEach(e => window.removeEventListener(e, onInteract, true));
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    ScrollTrigger.refresh();
+                }, 900);
             }
 
-            function handleKeyDismiss(e) {
-                if (e.key === 'ArrowDown' || e.key === ' ') dismissPreloader();
+            function onInteract(e) {
+                if (e.type === 'keydown' && e.key !== 'ArrowDown' && e.key !== ' ') return;
+                dismissPreloader();
             }
 
-            // Block scroll while preloader is visible
-            document.body.style.overflow = 'hidden';
-
-            // Wait for letters to animate in, then listen for scroll
+            // Start listening after letters animate in
             setTimeout(() => {
-                window.addEventListener('wheel', dismissPreloader, { passive: true });
-                window.addEventListener('touchmove', dismissPreloader, { passive: true });
-                window.addEventListener('keydown', handleKeyDismiss);
+                events.forEach(e => window.addEventListener(e, onInteract, { capture: true, passive: true }));
             }, 800);
 
-            // Fallback: auto-dismiss after 8s if user doesn't scroll
-            setTimeout(() => dismissPreloader(), 8000);
+            // Fallback: auto-dismiss after 6s
+            setTimeout(() => dismissPreloader(), 6000);
         })();
 
         /* ============================================
