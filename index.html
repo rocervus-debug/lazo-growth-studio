@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAZO Growth Studio — Project Development. Investor-Ready.</title>
+    <title>LAZO Growth Studio — Desarrollo de Proyectos. Listos para Inversión.</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 
     <style>
@@ -26,13 +26,7 @@
             background: #0a0a0a;
             color: #737373;
             line-height: 1.6;
-            opacity: 0;
             overflow-x: hidden;
-        }
-
-        body.loaded {
-            opacity: 1;
-            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         /* Noise texture overlay */
@@ -160,7 +154,7 @@
         }
 
         /* ============================================
-           PRELOADER
+           PRELOADER WITH AUTO-HIDE FALLBACK
            ============================================ */
         .preloader {
             position: fixed;
@@ -175,12 +169,19 @@
             z-index: 10000;
             opacity: 1;
             pointer-events: all;
+            animation: fallbackHide 3.5s forwards;
+        }
+
+        @keyframes fallbackHide {
+            0%, 90% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
         }
 
         .preloader.hidden {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: none;
         }
 
         .preloader-content {
@@ -221,6 +222,72 @@
         }
 
         /* ============================================
+           GRID PATTERN BACKGROUND
+           ============================================ */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(108, 117, 72, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 117, 72, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* ============================================
+           GLOW ORBS
+           ============================================ */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .glow-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.25) 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+        }
+
+        .glow-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.15) 0%, transparent 70%);
+            bottom: -100px;
+            left: -50px;
+        }
+
+        /* ============================================
+           SHIMMER BORDER EFFECT
+           ============================================ */
+        .shimmer-border {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .shimmer-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* ============================================
            NAVIGATION
            ============================================ */
         nav {
@@ -233,9 +300,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(10px);
-            background: rgba(10, 10, 10, 0.7);
-            mix-blend-mode: difference;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             transform: translateY(0);
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -379,6 +447,7 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 1;
+            filter: blur(120px);
         }
 
         .hero::after {
@@ -392,6 +461,7 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 1;
+            filter: blur(120px);
         }
 
         .hero-content {
@@ -402,17 +472,25 @@
 
         .hero h1 {
             margin-bottom: 2rem;
-            color: #ffffff;
-            background: linear-gradient(135deg, #ffffff 0%, #6c7548 50%, #ffffff 100%);
-            background-size: 200% 200%;
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.6) 0%,
+                #ffffff 25%,
+                #6c7548 50%,
+                #ffffff 75%,
+                rgba(255,255,255,0.6) 100%
+            );
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 8s ease infinite;
+            background-clip: text;
+            animation: gradientSweep 6s ease infinite;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
+        @keyframes gradientSweep {
+            0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero-word {
@@ -442,6 +520,21 @@
             margin-bottom: 4rem;
             flex-wrap: wrap;
             opacity: 0;
+        }
+
+        .hero-line {
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-olive), transparent);
+            animation: drawLine 2s ease-out 2.5s forwards;
+            z-index: 2;
+        }
+
+        @keyframes drawLine {
+            to { width: 100%; }
         }
 
         .scroll-indicator {
@@ -544,6 +637,14 @@
             overflow: hidden;
         }
 
+        .manifesto.grid-bg {
+            background-image:
+                linear-gradient(rgba(108, 117, 72, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 117, 72, 0.08) 1px, transparent 1px),
+                linear-gradient(135deg, #0a0a0a 0%, rgba(108, 117, 72, 0.15) 100%);
+            background-size: 60px 60px, 60px 60px, 100% 100%;
+        }
+
         .manifesto::before {
             content: '';
             position: absolute;
@@ -616,21 +717,35 @@
             grid-template-columns: 100px 1fr;
             gap: 3rem;
             align-items: flex-start;
+            padding: 3rem;
             padding-bottom: 4rem;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             opacity: 0;
             transform: translateY(40px);
             position: relative;
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 12px;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .service-item:last-child {
             border-bottom: none;
         }
 
-        /* Service hover reveal effect */
+        .service-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
         .service-item::before {
             content: '';
             position: absolute;
@@ -643,6 +758,7 @@
             pointer-events: none;
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 0;
+            filter: blur(60px);
         }
 
         .service-item:hover::before {
@@ -701,6 +817,10 @@
            ============================================ */
         .process {
             background: var(--color-black);
+            background-image:
+                linear-gradient(rgba(108, 117, 72, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 117, 72, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
             padding: 8rem 5%;
             position: relative;
         }
@@ -771,6 +891,8 @@
             font-weight: 700;
             color: var(--color-olive);
             flex-shrink: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .timeline-content h3 {
@@ -788,9 +910,42 @@
            ============================================ */
         .stats {
             background: var(--color-olive);
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
             padding: 8rem 5%;
             color: #ffffff;
             position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(120px);
+            z-index: 0;
+        }
+
+        .stats::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(120px);
+            z-index: 0;
         }
 
         .stats-grid {
@@ -800,11 +955,17 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 4rem;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .stat-item {
             opacity: 0;
             position: relative;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Progress bar behind stat */
@@ -817,6 +978,7 @@
             height: 4px;
             background: rgba(255, 255, 255, 0.3);
             animation: statFill 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            border-radius: 12px;
         }
 
         @keyframes statFill {
@@ -840,6 +1002,49 @@
             font-weight: 500;
             position: relative;
             z-index: 1;
+        }
+
+        /* ============================================
+           SOCIAL PROOF STRIP (MARQUEE)
+           ============================================ */
+        .social-proof {
+            background: var(--color-black);
+            padding: 3rem 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(108, 117, 72, 0.2);
+            border-bottom: 1px solid rgba(108, 117, 72, 0.2);
+        }
+
+        .proof-marquee {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            animation: scroll-marquee 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .proof-marquee--clone {
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .proof-item {
+            flex-shrink: 0;
+            color: var(--color-olive);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .proof-separator {
+            color: rgba(108, 117, 72, 0.4);
+            margin: 0 2rem;
         }
 
         /* ============================================
@@ -890,6 +1095,7 @@
             position: relative;
             overflow: hidden;
             will-change: transform;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .project-card::before {
@@ -998,10 +1204,17 @@
         .audience-card {
             background: white;
             padding: 3rem;
-            border-radius: 4px;
+            border-radius: 12px;
             border-left: 4px solid var(--color-olive);
             opacity: 0;
             transform: translateY(40px);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .audience-card:hover {
+            transform: translateY(20px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
 
         .audience-icon {
@@ -1032,6 +1245,10 @@
            ============================================ */
         .cta {
             background: var(--color-black);
+            background-image:
+                linear-gradient(rgba(108, 117, 72, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 117, 72, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
             padding: 10rem 5%;
             text-align: center;
             position: relative;
@@ -1045,9 +1262,11 @@
             right: -50%;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(108, 117, 72, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.25) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
+            filter: blur(120px);
+            z-index: 0;
         }
 
         .cta::after {
@@ -1057,9 +1276,11 @@
             left: -50%;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(108, 117, 72, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
+            filter: blur(120px);
+            z-index: 0;
         }
 
         .cta-content {
@@ -1110,6 +1331,21 @@
             color: #737373;
             padding: 4rem 5%;
             border-top: 1px solid rgba(108, 117, 72, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 200px;
+            background: radial-gradient(ellipse, rgba(108, 117, 72, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(120px);
         }
 
         .footer-content {
@@ -1119,6 +1355,8 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
             margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .footer-brand h3 {
@@ -1157,6 +1395,8 @@
             text-align: center;
             font-size: 0.85rem;
             color: #737373;
+            position: relative;
+            z-index: 1;
         }
 
         /* ============================================
@@ -1370,77 +1610,78 @@
     <nav>
         <div class="logo">LAZO</div>
         <ul class="nav-links">
-            <li><a href="#process">Process</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#process">Proceso</a></li>
+            <li><a href="#services">Servicios</a></li>
+            <li><a href="#projects">Proyectos</a></li>
+            <li><a href="#contact">Contacto</a></li>
         </ul>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
-            <h1 id="heroHeadline">We don't build brands. We build businesses.</h1>
-            <p class="hero-subtitle">Business structuring. Financial modeling. Investor-ready projects. Execution roadmaps.</p>
+            <h1 id="heroHeadline">No construimos marcas. Construimos negocios.</h1>
+            <p class="hero-subtitle">Estructuración de negocios. Modelado financiero. Proyectos listos para inversión. Roadmaps de ejecución.</p>
             <div class="hero-cta">
-                <a href="#contact" class="btn btn-primary">Start Your Project →</a>
+                <a href="#contact" class="btn btn-primary">Inicia Tu Proyecto →</a>
             </div>
         </div>
+        <div class="hero-line"></div>
         <div class="scroll-indicator">
             <div class="scroll-indicator-line"></div>
-            <div class="scroll-indicator-text">Scroll</div>
+            <div class="scroll-indicator-text">Explora</div>
         </div>
     </section>
 
     <!-- MANIFESTO SECTION -->
-    <section class="manifesto">
+    <section class="manifesto grid-bg">
         <div class="manifesto-content">
-            <p class="manifesto-line">Every great business started as an idea.</p>
-            <p class="manifesto-line">But ideas don't raise capital.</p>
-            <p class="manifesto-line">Ideas don't convince investors.</p>
-            <p class="manifesto-line">Ideas don't generate revenue.</p>
-            <p class="manifesto-line"><span class="highlight">Structure</span> does.</p>
-            <p class="manifesto-line">We build the <span class="highlight">structure</span>.</p>
+            <p class="manifesto-line">Todo gran negocio empezó como una idea.</p>
+            <p class="manifesto-line">Pero las ideas no levantan capital.</p>
+            <p class="manifesto-line">Las ideas no convencen inversionistas.</p>
+            <p class="manifesto-line">Las ideas no generan ingresos.</p>
+            <p class="manifesto-line">La <span class="highlight">estructura</span> sí.</p>
+            <p class="manifesto-line">Nosotros construimos la <span class="highlight">estructura</span>.</p>
         </div>
     </section>
 
     <!-- SERVICES SECTION -->
     <section class="services" id="services">
         <div class="section-header">
-            <h2>What We Build</h2>
+            <h2>Lo Que Construimos</h2>
             <div class="header-underline"></div>
         </div>
         <div class="service-grid">
-            <div class="service-item">
+            <div class="service-item shimmer-border">
                 <div class="service-number">01</div>
                 <div class="service-content">
-                    <h3>PROJECT STRUCTURING</h3>
-                    <p>Business model architecture, operational design, and market validation. We define how your business actually works.</p>
-                    <div class="service-price">$2,500 – $5,000</div>
+                    <h3>ESTRUCTURACIÓN DE PROYECTOS</h3>
+                    <p>Arquitectura de modelo de negocio, diseño operativo y validación de mercado. Definimos cómo funciona tu negocio realmente.</p>
+                    <div class="service-price">$45,000 – $90,000 MXN</div>
                 </div>
             </div>
-            <div class="service-item">
+            <div class="service-item shimmer-border">
                 <div class="service-number">02</div>
                 <div class="service-content">
-                    <h3>FINANCIAL MODELING</h3>
-                    <p>Revenue projections, unit economics, break-even analysis, and investment structure. The math that proves your project.</p>
-                    <div class="service-price">$3,000 – $7,500</div>
+                    <h3>MODELADO FINANCIERO</h3>
+                    <p>Proyecciones de ingresos, unit economics, análisis de punto de equilibrio y estructura de inversión. Los números que prueban tu proyecto.</p>
+                    <div class="service-price">$55,000 – $135,000 MXN</div>
                 </div>
             </div>
-            <div class="service-item">
+            <div class="service-item shimmer-border">
                 <div class="service-number">03</div>
                 <div class="service-content">
-                    <h3>INVESTOR-READY PACKAGE</h3>
-                    <p>Pitch deck, financial model, executive summary, and data room. Everything an investor needs to say yes.</p>
-                    <div class="service-price">$5,000 – $15,000</div>
+                    <h3>PAQUETE LISTO PARA INVERSIÓN</h3>
+                    <p>Pitch deck, modelo financiero, resumen ejecutivo y data room. Todo lo que un inversionista necesita para decir sí.</p>
+                    <div class="service-price">$90,000 – $270,000 MXN</div>
                 </div>
             </div>
-            <div class="service-item">
+            <div class="service-item shimmer-border">
                 <div class="service-number">04</div>
                 <div class="service-content">
-                    <h3>EXECUTION ROADMAP</h3>
-                    <p>Phase-by-phase launch plan with milestones, resource allocation, and risk mitigation. From plan to reality.</p>
-                    <div class="service-price">$2,000 – $4,000</div>
+                    <h3>ROADMAP DE EJECUCIÓN</h3>
+                    <p>Plan de lanzamiento fase por fase con hitos, asignación de recursos y mitigación de riesgos. Del plan a la realidad.</p>
+                    <div class="service-price">$36,000 – $72,000 MXN</div>
                 </div>
             </div>
         </div>
@@ -1449,43 +1690,43 @@
     <!-- PROCESS SECTION -->
     <section class="process" id="process">
         <div class="section-header">
-            <h2>The Process</h2>
+            <h2>El Proceso</h2>
             <div class="header-underline"></div>
         </div>
         <div class="timeline">
             <div class="timeline-step">
                 <div class="timeline-dot">1</div>
                 <div class="timeline-content">
-                    <h3>DISCOVERY</h3>
-                    <p>We understand your idea, market, and ambition. We ask the hard questions.</p>
+                    <h3>DESCUBRIMIENTO</h3>
+                    <p>Entendemos tu idea, mercado y ambición. Hacemos las preguntas difíciles.</p>
                 </div>
             </div>
             <div class="timeline-step">
                 <div class="timeline-dot">2</div>
                 <div class="timeline-content">
-                    <h3>STRUCTURING</h3>
-                    <p>We architect the business model and operations. We design how it actually works.</p>
+                    <h3>ESTRUCTURACIÓN</h3>
+                    <p>Diseñamos la arquitectura del modelo de negocio y las operaciones. Definimos cómo funciona realmente.</p>
                 </div>
             </div>
             <div class="timeline-step">
                 <div class="timeline-dot">3</div>
                 <div class="timeline-content">
-                    <h3>FINANCIAL VALIDATION</h3>
-                    <p>We build the numbers that prove viability. Revenue, costs, margins, unit economics.</p>
+                    <h3>VALIDACIÓN FINANCIERA</h3>
+                    <p>Construimos los números que prueban la viabilidad. Ingresos, costos, márgenes, unit economics.</p>
                 </div>
             </div>
             <div class="timeline-step">
                 <div class="timeline-dot">4</div>
                 <div class="timeline-content">
-                    <h3>INVESTOR READINESS</h3>
-                    <p>We package everything for decision-makers. Pitch deck, model, summary, data room.</p>
+                    <h3>LISTO PARA INVERSIÓN</h3>
+                    <p>Empaquetamos todo para los tomadores de decisiones. Pitch deck, modelo, resumen, data room.</p>
                 </div>
             </div>
             <div class="timeline-step">
                 <div class="timeline-dot">5</div>
                 <div class="timeline-content">
-                    <h3>EXECUTION</h3>
-                    <p>We create the roadmap to make it real. Milestones, resources, timelines, risks.</p>
+                    <h3>EJECUCIÓN</h3>
+                    <p>Creamos el roadmap para hacerlo realidad. Hitos, recursos, tiempos, riesgos.</p>
                 </div>
             </div>
         </div>
@@ -1495,49 +1736,83 @@
     <section class="stats">
         <div class="stats-grid">
             <div class="stat-item">
-                <div class="stat-number">$2M+</div>
-                <div class="stat-label">in projects structured</div>
+                <div class="stat-number">$36M+</div>
+                <div class="stat-label">en proyectos estructurados</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">15+</div>
-                <div class="stat-label">businesses built</div>
+                <div class="stat-label">negocios construidos</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">3x</div>
-                <div class="stat-label">average investor ROI</div>
+                <div class="stat-label">ROI promedio del inversionista</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">6 weeks</div>
-                <div class="stat-label">idea to investor-ready</div>
+                <div class="stat-number">6 semanas</div>
+                <div class="stat-label">de idea a listo para inversión</div>
             </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF MARQUEE -->
+    <section class="social-proof">
+        <div class="proof-marquee">
+            <span class="proof-item">+$36M MXN en proyectos estructurados</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">15+ negocios construidos</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Bienes raíces</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Fitness & Wellness</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Plataformas digitales</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Listos para inversión</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Enfocados en ROI</span>
+            <span class="proof-separator">·</span>
+            <!-- Clone for seamless loop -->
+            <span class="proof-item proof-marquee--clone">+$36M MXN en proyectos estructurados</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">15+ negocios construidos</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Bienes raíces</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Fitness & Wellness</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Plataformas digitales</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Listos para inversión</span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">Enfocados en ROI</span>
         </div>
     </section>
 
     <!-- PROJECTS SECTION -->
     <section class="projects" id="projects">
         <div class="projects-header">
-            <h2>What We're Building</h2>
+            <h2>Lo Que Estamos Construyendo</h2>
         </div>
         <div class="projects-scroll">
             <div class="project-card project-card-sierra">
                 <div class="project-content">
-                    <span class="project-tag">Real Estate</span>
+                    <span class="project-tag">Bienes Raíces</span>
                     <h3>SIERRA ALTA</h3>
-                    <p>Boutique mountain cabin development. Structured for $1.2M investment round. Full financial model + execution roadmap delivered.</p>
+                    <p>Desarrollo boutique de cabañas de montaña. Estructurado para ronda de inversión de $21M MXN. Modelo financiero completo + roadmap de ejecución entregados.</p>
                 </div>
             </div>
             <div class="project-card project-card-fitlab">
                 <div class="project-content">
                     <span class="project-tag">Fitness & Wellness</span>
                     <h3>FITLAB</h3>
-                    <p>Urban fitness studio concept. Franchise-ready model with 3-year projections. Break-even at month 14. Investor deck closed $500K seed.</p>
+                    <p>Concepto de estudio fitness urbano. Modelo listo para franquicia con proyecciones a 3 años. Punto de equilibrio en mes 14. Pitch deck cerró $9M MXN en semilla.</p>
                 </div>
             </div>
             <div class="project-card project-card-mercado">
                 <div class="project-content">
-                    <span class="project-tag">Digital Platform</span>
+                    <span class="project-tag">Plataforma Digital</span>
                     <h3>MERCADO DIGITAL</h3>
-                    <p>B2B marketplace platform. SaaS business model with $45 CAC and 8.2x LTV ratio. Execution roadmap for MVP in 90 days.</p>
+                    <p>Plataforma marketplace B2B. Modelo de negocio SaaS con $810 MXN de CAC y ratio LTV de 8.2x. Roadmap de ejecución para MVP en 90 días.</p>
                 </div>
             </div>
         </div>
@@ -1546,23 +1821,23 @@
     <!-- AUDIENCE SECTION -->
     <section class="audience">
         <div class="section-header">
-            <h2>Built For</h2>
+            <h2>Hecho Para</h2>
         </div>
         <div class="audience-grid">
             <div class="audience-card">
                 <div class="audience-icon">💼</div>
-                <h3>ENTREPRENEURS</h3>
-                <p>You have an idea and capital. You need structure, not advice.</p>
+                <h3>EMPRENDEDORES</h3>
+                <p>Tienes una idea y capital. Necesitas estructura, no consejos.</p>
             </div>
             <div class="audience-card">
                 <div class="audience-icon">📈</div>
-                <h3>INVESTORS</h3>
-                <p>You need projects that are validated and ready. No rough diamonds.</p>
+                <h3>INVERSIONISTAS</h3>
+                <p>Necesitas proyectos validados y listos. Sin diamantes en bruto.</p>
             </div>
             <div class="audience-card">
                 <div class="audience-icon">🏢</div>
-                <h3>BUSINESS OWNERS</h3>
-                <p>You're already running something. You need to scale with a real plan.</p>
+                <h3>DUEÑOS DE NEGOCIO</h3>
+                <p>Ya tienes algo funcionando. Necesitas escalar con un plan real.</p>
             </div>
         </div>
     </section>
@@ -1570,10 +1845,10 @@
     <!-- CTA SECTION -->
     <section class="cta" id="contact">
         <div class="cta-content">
-            <h2>Let's build something real.</h2>
-            <p>Every great business starts with structure.</p>
-            <a href="mailto:hello@lazogrowth.studio" class="btn btn-primary">Start Your Project →</a>
-            <p class="cta-email">or email us at <a href="mailto:hello@lazogrowth.studio">hello@lazogrowth.studio</a></p>
+            <h2>Construyamos algo real.</h2>
+            <p>Todo gran negocio empieza con estructura.</p>
+            <a href="mailto:hello@lazogrowth.studio" class="btn btn-primary">Inicia Tu Proyecto →</a>
+            <p class="cta-email">o escríbenos a <a href="mailto:hello@lazogrowth.studio">hello@lazogrowth.studio</a></p>
         </div>
     </section>
 
@@ -1582,17 +1857,17 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <h3>LAZO GROWTH STUDIO</h3>
-                <p>Project Development Studio · Est. 2026</p>
+                <p>Estudio de Desarrollo de Proyectos · Est. 2026</p>
             </div>
             <div class="footer-links">
-                <a href="#process">Process</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
+                <a href="#process">Proceso</a>
+                <a href="#services">Servicios</a>
+                <a href="#projects">Proyectos</a>
+                <a href="#contact">Contacto</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 LAZO Growth Studio. All rights reserved.</p>
+            <p>&copy; 2026 LAZO Growth Studio. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -1706,7 +1981,7 @@
         });
 
         /* ============================================
-           PRELOADER ANIMATION
+           PRELOADER ANIMATION - FIXED BUG
            ============================================ */
         window.addEventListener('load', () => {
             const preloader = document.querySelector('.preloader');
@@ -1717,7 +1992,6 @@
                 ease: 'power2.inOut',
                 onComplete: () => {
                     preloader.classList.add('hidden');
-                    document.body.classList.add('loaded');
                     ScrollTrigger.refresh();
                 }
             });
@@ -1800,6 +2074,21 @@
         });
 
         /* ============================================
+           SPOTLIGHT HOVER EFFECT ON CARDS
+           ============================================ */
+        document.querySelectorAll('.service-item').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(108,117,72,0.15) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.02) 100%)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'rgba(255,255,255,0.03)';
+            });
+        });
+
+        /* ============================================
            HEADER UNDERLINE ANIMATION
            ============================================ */
         document.querySelectorAll('.header-underline').forEach((underline, index) => {
@@ -1869,7 +2158,7 @@
                 const finalNumber = parseFloat(numberMatch[0]);
                 const isPercentage = finalText.includes('%');
                 const isMoney = finalText.includes('$');
-                const isWeeks = finalText.includes('weeks');
+                const isWeeks = finalText.includes('semanas');
                 const isMultiplier = finalText.includes('x');
 
                 ScrollTrigger.create({
@@ -1892,7 +2181,7 @@
                                 if (isMoney) display = '$' + current + 'M+';
                                 else if (isPercentage) display = current + '%';
                                 else if (isMultiplier) display = current + 'x';
-                                else if (isWeeks) display = current + ' weeks';
+                                else if (isWeeks) display = current + ' semanas';
                                 else display = current + '+';
 
                                 stat.textContent = display;
