@@ -640,56 +640,83 @@
            MANIFESTO SECTION
            ============================================ */
         .manifesto {
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 10rem 5%;
-            background: linear-gradient(135deg, #0a0a0a 0%, rgba(108, 117, 72, 0.15) 100%);
+            padding: 8rem 5%;
+            background: #0a0a0a;
             position: relative;
             overflow: hidden;
         }
 
         .manifesto.grid-bg {
             background-image: none;
-            background: linear-gradient(135deg, #0a0a0a 0%, rgba(108, 117, 72, 0.12) 50%, #0a0a0a 100%);
-            background-size: 200% 200%;
-            animation: manifestoGradient 12s ease-in-out infinite;
-        }
-
-        @keyframes manifestoGradient {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+            background: #0a0a0a;
         }
 
         .manifesto::before {
             content: '';
             position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 200px;
-            background: radial-gradient(ellipse at center, rgba(108, 117, 72, 0.1), transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(108, 117, 72, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
             pointer-events: none;
+            animation: manifestoGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes manifestoGlow {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
         }
 
         .manifesto-content {
-            max-width: 900px;
+            max-width: 650px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            text-align: center;
         }
 
         .manifesto-line {
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            line-height: 1.4;
-            margin-bottom: 2rem;
-            color: #ffffff;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            line-height: 1.7;
+            margin-bottom: 0;
+            padding: 0.6rem 0;
+            color: rgba(255, 255, 255, 0.28);
+            font-weight: 400;
+            letter-spacing: 0.02em;
         }
 
-        .manifesto-line.highlight {
+        .manifesto-line.manifesto-accent {
+            color: #ffffff;
+            font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+            font-weight: 600;
+            padding-top: 2.5rem;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .manifesto-line.manifesto-accent::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--color-olive);
+            opacity: 0.5;
+        }
+
+        .manifesto-line .highlight {
             color: var(--color-olive);
+            font-weight: 600;
         }
 
         /* ============================================
@@ -2012,6 +2039,14 @@
 
         body.light-mode .highlight { color: var(--color-olive); }
 
+        body.light-mode .manifesto-line {
+            color: rgba(0, 0, 0, 0.25);
+        }
+
+        body.light-mode .manifesto-line.manifesto-accent {
+            color: #0a0a0a;
+        }
+
         body.light-mode .hero,
         body.light-mode .manifesto,
         body.light-mode .process,
@@ -2237,8 +2272,8 @@
             <p class="manifesto-line">Pero las ideas no levantan capital.</p>
             <p class="manifesto-line">Las ideas no convencen inversionistas.</p>
             <p class="manifesto-line">Las ideas no generan ingresos.</p>
-            <p class="manifesto-line">La <span class="highlight">estructura</span> sí.</p>
-            <p class="manifesto-line">Nosotros construimos la <span class="highlight">estructura</span>.</p>
+            <p class="manifesto-line manifesto-accent">La <span class="highlight">estructura</span> sí.</p>
+            <p class="manifesto-line manifesto-accent">Nosotros construimos la <span class="highlight">estructura</span>.</p>
         </div>
     </section>
 
