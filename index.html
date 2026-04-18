@@ -2146,7 +2146,7 @@
     <div class="floating-blob blob-3"></div>
 
     <!-- PRELOADER -->
-    <div class="preloader">
+    <div class="preloader" id="preloader" onclick="window._dismissPreloader && window._dismissPreloader()">
         <div class="preloader-content">
             <div class="preloader-text">
                 <span class="preloader-letter">L</span>
@@ -2157,6 +2157,25 @@
         </div>
         <span class="preloader-scroll-hint">Desliza para explorar ↓</span>
     </div>
+    <script>
+    (function(){
+        var p = document.getElementById('preloader');
+        var done = false;
+        function go(){
+            if(done) return;
+            done = true;
+            p.classList.add('hidden');
+            setTimeout(function(){ p.style.display='none'; }, 900);
+        }
+        window._dismissPreloader = go;
+        document.addEventListener('wheel', go, true);
+        document.addEventListener('touchstart', go, true);
+        document.addEventListener('keydown', function(e){
+            if(e.key==='ArrowDown'||e.key===' ') go();
+        }, true);
+        setTimeout(go, 6000);
+    })();
+    </script>
 
     <!-- CUSTOM CURSOR -->
     <div class="cursor"></div>
@@ -2676,39 +2695,6 @@
             mouseX = e.clientX;
             mouseY = e.clientY;
         });
-
-        /* ============================================
-           PRELOADER — SCROLL / TOUCH / CLICK TO DISMISS
-           ============================================ */
-        (function() {
-            const preloader = document.querySelector('.preloader');
-            let preloaderDismissed = false;
-            const events = ['wheel', 'touchstart', 'mousedown', 'keydown'];
-
-            function dismissPreloader() {
-                if (preloaderDismissed) return;
-                preloaderDismissed = true;
-                preloader.classList.add('hidden');
-                events.forEach(e => window.removeEventListener(e, onInteract, true));
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                    ScrollTrigger.refresh();
-                }, 900);
-            }
-
-            function onInteract(e) {
-                if (e.type === 'keydown' && e.key !== 'ArrowDown' && e.key !== ' ') return;
-                dismissPreloader();
-            }
-
-            // Start listening after letters animate in
-            setTimeout(() => {
-                events.forEach(e => window.addEventListener(e, onInteract, { capture: true, passive: true }));
-            }, 800);
-
-            // Fallback: auto-dismiss after 6s
-            setTimeout(() => dismissPreloader(), 6000);
-        })();
 
         /* ============================================
            HERO HEADLINE ANIMATION
