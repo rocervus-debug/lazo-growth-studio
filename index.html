@@ -1058,18 +1058,18 @@
         }
 
         /* ============================================
-           PROJECTS SECTION (HORIZONTAL SCROLL)
+           PROJECTS SECTION (AUTO-SCROLL CAROUSEL)
            ============================================ */
         .projects {
             background: var(--color-black);
-            padding: 8rem 0;
+            padding: 6rem 0;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
         }
 
         .projects-header {
             padding: 0 5%;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             position: relative;
             z-index: 10;
         }
@@ -1079,35 +1079,80 @@
             margin-bottom: 0;
         }
 
-        .projects {
-            display: flex;
-            flex-direction: column;
+        .projects-scroll-wrapper {
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+        }
+
+        .projects-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .projects-scroll-wrapper:active {
+            cursor: grabbing;
         }
 
         .projects-scroll {
             display: flex;
-            gap: 3rem;
-            padding: 4rem 5%;
-            height: auto;
-            width: fit-content;
+            gap: 2rem;
+            padding: 2rem 5%;
+            width: max-content;
+            animation: autoScroll 25s linear infinite;
+        }
+
+        .projects-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 1rem)); }
         }
 
         .project-card {
-            flex: 0 0 65vw;
-            min-width: 65vw;
-            height: 600px;
+            flex: 0 0 500px;
+            height: 420px;
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            border-radius: 4px;
-            padding: 4rem;
+            border-radius: 12px;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             position: relative;
             overflow: hidden;
-            will-change: transform;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
         }
 
+        .project-card:hover {
+            border-color: rgba(108, 117, 72, 0.3);
+            transform: translateY(-4px);
+        }
+
+        /* Background image layer */
+        .project-card .project-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .project-card:hover .project-bg {
+            opacity: 0.25;
+        }
+
+        /* Dark gradient overlay on top of bg image */
         .project-card::before {
             content: '';
             position: absolute;
@@ -1115,46 +1160,26 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%);
             pointer-events: none;
+            z-index: 1;
         }
 
-        /* Voltogen — solar energy amber/orange tones */
-        .project-card-voltogen {
-            background: linear-gradient(135deg, #1a1400 0%, #2a1f00 50%, #1a1a1a 100%);
-        }
-        .project-card-voltogen::before {
-            background:
-                linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%),
-                radial-gradient(circle at 70% 30%, rgba(255, 165, 0, 0.12) 0%, transparent 60%),
-                radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.08) 0%, transparent 50%);
+        .project-card-voltogen .project-bg {
+            background-image: url('img/voltogen_bg.jpg');
         }
 
-        /* FRWD — bold dark with olive accent */
-        .project-card-frwd {
-            background: linear-gradient(135deg, #111111 0%, #1e1e1e 50%, #0d0d0d 100%);
-        }
-        .project-card-frwd::before {
-            background:
-                linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%),
-                radial-gradient(circle at 60% 40%, rgba(108, 117, 72, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+        .project-card-frwd .project-bg {
+            background-image: url('img/frwd_bg.jpg');
         }
 
-        /* ORIGIN — warm earth tones (matching their beige/brown deck) */
-        .project-card-origin {
-            background: linear-gradient(135deg, #1a1610 0%, #2a2318 50%, #1a1a1a 100%);
-        }
-        .project-card-origin::before {
-            background:
-                linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%),
-                radial-gradient(circle at 50% 30%, rgba(180, 150, 100, 0.1) 0%, transparent 60%),
-                radial-gradient(circle at 80% 70%, rgba(108, 117, 72, 0.08) 0%, transparent 50%);
+        .project-card-origin .project-bg {
+            background-image: url('img/origin_bg.jpg');
         }
 
         .project-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
         }
 
         .project-tag {
@@ -1458,8 +1483,8 @@
             }
 
             .project-card {
-                flex: 0 0 90vw;
-                min-width: 90vw;
+                flex: 0 0 420px;
+                height: 380px;
             }
         }
 
@@ -1496,10 +1521,9 @@
             }
 
             .project-card {
-                flex: 0 0 100vw;
-                min-width: 100vw;
+                flex: 0 0 320px;
+                height: 350px;
                 padding: 2rem;
-                height: 400px;
             }
 
             .project-card h3 {
@@ -1791,28 +1815,59 @@
     <!-- PROJECTS SECTION -->
     <section class="projects" id="projects">
         <div class="projects-header">
-            <h2>Lo Que Estamos Construyendo</h2>
+            <h2>Proyectos Reales</h2>
         </div>
-        <div class="projects-scroll">
-            <div class="project-card project-card-voltogen">
-                <div class="project-content">
-                    <span class="project-tag">Energía Solar</span>
-                    <h3>VOLTOGEN</h3>
-                    <p>Empresa de venta, instalación y mantenimiento de paneles solares. Creamos branding completo, estrategia de mercado y posicionamiento para sector residencial, comercial e industrial.</p>
+        <div class="projects-scroll-wrapper">
+            <div class="projects-scroll">
+                <!-- Original set -->
+                <div class="project-card project-card-voltogen">
+                    <div class="project-bg"></div>
+                    <div class="project-content">
+                        <span class="project-tag">Energía Solar</span>
+                        <h3>VOLTOGEN</h3>
+                        <p>Empresa de venta, instalación y mantenimiento de paneles solares. Creamos branding completo, estrategia de mercado y posicionamiento para sector residencial, comercial e industrial.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="project-card project-card-frwd">
-                <div class="project-content">
-                    <span class="project-tag">Fitness Premium</span>
-                    <h3>FRWD</h3>
-                    <p>Estudio fitness de alta gama enfocado en resistencia y fuerza. Creado desde cero: nombre, branding, concepto de negocio. Fondeado y materializado.</p>
+                <div class="project-card project-card-frwd">
+                    <div class="project-bg"></div>
+                    <div class="project-content">
+                        <span class="project-tag">Fitness Premium</span>
+                        <h3>FRWD</h3>
+                        <p>Estudio fitness de alta gama enfocado en resistencia y fuerza. Creado desde cero: nombre, branding, concepto de negocio. Fondeado y materializado.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="project-card project-card-origin">
-                <div class="project-content">
-                    <span class="project-tag">Gym Boutique</span>
-                    <h3>ORIGIN</h3>
-                    <p>Ecosistema fitness híbrido dentro de un club de pádel. Gym boutique + estudio funcional creado desde cero: concepto, branding, business plan, renders y modelo operativo.</p>
+                <div class="project-card project-card-origin">
+                    <div class="project-bg"></div>
+                    <div class="project-content">
+                        <span class="project-tag">Gym Boutique</span>
+                        <h3>ORIGIN</h3>
+                        <p>Ecosistema fitness híbrido dentro de un club de pádel. Gym boutique + estudio funcional creado desde cero: concepto, branding, business plan, renders y modelo operativo.</p>
+                    </div>
+                </div>
+                <!-- Clone set for seamless loop -->
+                <div class="project-card project-card-voltogen">
+                    <div class="project-bg"></div>
+                    <div class="project-content">
+                        <span class="project-tag">Energía Solar</span>
+                        <h3>VOLTOGEN</h3>
+                        <p>Empresa de venta, instalación y mantenimiento de paneles solares. Creamos branding completo, estrategia de mercado y posicionamiento para sector residencial, comercial e industrial.</p>
+                    </div>
+                </div>
+                <div class="project-card project-card-frwd">
+                    <div class="project-bg"></div>
+                    <div class="project-content">
+                        <span class="project-tag">Fitness Premium</span>
+                        <h3>FRWD</h3>
+                        <p>Estudio fitness de alta gama enfocado en resistencia y fuerza. Creado desde cero: nombre, branding, concepto de negocio. Fondeado y materializado.</p>
+                    </div>
+                </div>
+                <div class="project-card project-card-origin">
+                    <div class="project-bg"></div>
+                    <div class="project-content">
+                        <span class="project-tag">Gym Boutique</span>
+                        <h3>ORIGIN</h3>
+                        <p>Ecosistema fitness híbrido dentro de un club de pádel. Gym boutique + estudio funcional creado desde cero: concepto, branding, business plan, renders y modelo operativo.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2203,27 +2258,27 @@
         });
 
         /* ============================================
-           HORIZONTAL SCROLL SECTION - CRITICAL FIX
+           PROJECTS CAROUSEL — DRAG TO SCROLL
            ============================================ */
-        const projectsSection = document.querySelector('.projects');
-        const projectsScroll = document.querySelector('.projects-scroll');
+        const projectsWrapper = document.querySelector('.projects-scroll-wrapper');
+        if (projectsWrapper) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-        if (projectsSection && projectsScroll) {
-            let scrollWidth = projectsScroll.scrollWidth;
-
-            gsap.to(projectsScroll, {
-                x: () => -(scrollWidth - window.innerWidth),
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: projectsSection,
-                    start: 'top top',
-                    end: () => `+=${scrollWidth}`,
-                    scrub: 1,
-                    pin: true,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true,
-                    markers: false
-                }
+            projectsWrapper.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - projectsWrapper.offsetLeft;
+                scrollLeft = projectsWrapper.scrollLeft;
+            });
+            projectsWrapper.addEventListener('mouseleave', () => isDown = false);
+            projectsWrapper.addEventListener('mouseup', () => isDown = false);
+            projectsWrapper.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - projectsWrapper.offsetLeft;
+                const walk = (x - startX) * 2;
+                projectsWrapper.scrollLeft = scrollLeft - walk;
             });
         }
 
