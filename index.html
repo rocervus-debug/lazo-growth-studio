@@ -4,6 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAZO Growth Studio — Desarrollo de Proyectos. Listos para Inversión.</title>
+    <meta name="description" content="Estudio de desarrollo de proyectos. Estructuración de negocios, modelado financiero, branding, contenido y tecnología. De la idea a la realidad.">
+    <meta name="author" content="LAZO Growth Studio">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="LAZO Growth Studio — Desarrollo de Proyectos">
+    <meta property="og:description" content="No construimos marcas. Construimos negocios. Estructuración, modelado financiero, branding y tecnología.">
+    <meta property="og:url" content="https://lazo-growth-studio.vercel.app/">
+    <meta property="og:site_name" content="LAZO Growth Studio">
+    <meta property="og:locale" content="es_MX">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LAZO Growth Studio — Desarrollo de Proyectos">
+    <meta name="twitter:description" content="No construimos marcas. Construimos negocios. De la idea a la realidad.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='48' fill='%236c7548'%3EL%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='48' fill='%236c7548'%3EL%3C/text%3E%3C/svg%3E">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://lazo-growth-studio.vercel.app/">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 
     <style>
@@ -1497,10 +1521,26 @@
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-olive);
+            transition: width 0.3s ease;
         }
 
         .footer-links a:hover {
             color: var(--color-olive);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
         }
 
         .footer-bottom {
@@ -1631,6 +1671,89 @@
             .parallax-shape {
                 display: none;
             }
+
+            /* Toggle responsive */
+            .vertical-toggle {
+                flex-direction: row;
+                gap: 0.3rem;
+                padding: 0.25rem;
+            }
+
+            .vertical-btn {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.75rem;
+            }
+
+            .vertical-label {
+                font-size: 0.6rem;
+            }
+
+            /* Testimonials responsive */
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .testimonial-card {
+                padding: 2rem;
+            }
+
+            /* About responsive */
+            .about {
+                padding: 5rem 5%;
+            }
+
+            /* Contact form responsive */
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .contact-form {
+                margin-top: 1.5rem;
+            }
+
+            /* Logos bar responsive */
+            .logos-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 2rem 5%;
+            }
+
+            .logos-bar-items {
+                gap: 2rem;
+            }
+
+            /* Stats grid mobile */
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* Theme toggle mobile */
+            .theme-toggle {
+                top: 0.8rem;
+                right: 1rem;
+                width: 38px;
+                height: 38px;
+            }
+
+            /* WhatsApp float mobile */
+            .whatsapp-float {
+                bottom: 1.2rem;
+                right: 1.2rem;
+                width: 52px;
+                height: 52px;
+            }
+
+            .whatsapp-float svg {
+                width: 26px;
+                height: 26px;
+            }
+
+            .whatsapp-float .tooltip {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1670,6 +1793,58 @@
             .btn {
                 padding: 0.9rem 2rem;
                 font-size: 0.9rem;
+            }
+
+            /* Toggle ultra-small */
+            .vertical-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.7rem;
+            }
+
+            .vertical-label {
+                font-size: 0.55rem;
+            }
+
+            /* Timeline mobile */
+            .timeline-dot {
+                width: 64px;
+                height: 64px;
+            }
+
+            .timeline-dot svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .timeline-step-number {
+                width: 22px;
+                height: 22px;
+                font-size: 0.65rem;
+            }
+
+            /* Manifesto mobile */
+            .manifesto {
+                min-height: 60vh;
+                padding: 5rem 6%;
+            }
+
+            .manifesto-line {
+                font-size: 0.95rem;
+            }
+
+            .manifesto-line.manifesto-accent {
+                font-size: 1.15rem;
+            }
+
+            /* Stats 1 column on very small */
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Project cards smaller */
+            .project-card {
+                flex: 0 0 280px;
+                height: 320px;
             }
         }
 
@@ -1856,6 +2031,12 @@
             border: 1px solid rgba(0, 0, 0, 0.06);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
         }
 
         .testimonial-card::before {
@@ -1940,6 +2121,7 @@
         .contact-form input:focus,
         .contact-form textarea:focus {
             border-color: var(--color-olive);
+            box-shadow: 0 0 0 3px rgba(108, 117, 72, 0.15);
         }
 
         .contact-form textarea {
