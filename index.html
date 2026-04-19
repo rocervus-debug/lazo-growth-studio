@@ -2434,6 +2434,18 @@
                 </div>
             </div>
         </div>
+
+        <script>
+        document.querySelectorAll('.vertical-btn').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                document.querySelectorAll('.vertical-btn').forEach(function(b){ b.classList.remove('active'); });
+                btn.classList.add('active');
+                var panelId = 'panel-' + btn.getAttribute('data-panel');
+                document.querySelectorAll('.service-panel').forEach(function(p){ p.classList.remove('active'); });
+                document.getElementById(panelId).classList.add('active');
+            });
+        });
+        </script>
     </section>
 
     <!-- PROCESS SECTION -->
@@ -2941,30 +2953,6 @@
                     toggleActions: 'play none none none'
                 },
                 ease: 'power2.out'
-            });
-        });
-
-        /* ============================================
-           VERTICAL TOGGLE (PROJECTS / STUDIO)
-           ============================================ */
-        document.querySelectorAll('.vertical-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Toggle active button
-                document.querySelectorAll('.vertical-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // Toggle panel
-                const panelId = 'panel-' + btn.dataset.panel;
-                document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
-                const panel = document.getElementById(panelId);
-                panel.classList.add('active');
-                // Animate items in
-                const items = panel.querySelectorAll('.service-item');
-                items.forEach((item, i) => {
-                    gsap.fromTo(item,
-                        { opacity: 0, y: 30 },
-                        { opacity: 1, y: 0, duration: 0.5, delay: i * 0.1, ease: 'power2.out' }
-                    );
-                });
             });
         });
 
