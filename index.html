@@ -725,68 +725,56 @@
         .vertical-toggle {
             display: flex;
             justify-content: center;
-            gap: 0;
+            gap: 0.5rem;
             margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .vertical-toggle::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.35rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .vertical-btn {
             background: none;
             border: none;
-            padding: 1rem 2.5rem;
+            padding: 0.9rem 2.2rem;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             position: relative;
-            transition: color 0.4s ease;
+            transition: all 0.4s ease;
+            border-radius: 40px;
         }
 
         .vertical-btn:hover {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .vertical-btn.active {
             color: #ffffff;
-        }
-
-        .vertical-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
             background: var(--color-olive);
-            z-index: 1;
+            box-shadow: 0 4px 15px rgba(108, 117, 72, 0.3);
         }
 
         .vertical-label {
             display: block;
             font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 400;
-            letter-spacing: 0.05em;
-            color: rgba(255, 255, 255, 0.2);
-            margin-top: 0.3rem;
+            letter-spacing: 0.03em;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 0.25rem;
             text-transform: none;
         }
 
         .vertical-btn.active .vertical-label {
-            color: var(--color-olive);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .service-panel {
@@ -799,23 +787,25 @@
         }
 
         /* Light mode */
-        body.light-mode .vertical-toggle::after {
-            background: rgba(0, 0, 0, 0.08);
+        body.light-mode .vertical-toggle {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.1);
         }
         body.light-mode .vertical-btn {
-            color: rgba(0, 0, 0, 0.25);
+            color: rgba(0, 0, 0, 0.45);
         }
         body.light-mode .vertical-btn:hover {
-            color: rgba(0, 0, 0, 0.5);
+            color: rgba(0, 0, 0, 0.7);
         }
         body.light-mode .vertical-btn.active {
-            color: #0a0a0a;
+            color: #ffffff;
+            background: var(--color-olive);
         }
         body.light-mode .vertical-label {
-            color: rgba(0, 0, 0, 0.15);
+            color: rgba(0, 0, 0, 0.3);
         }
         body.light-mode .vertical-btn.active .vertical-label {
-            color: var(--color-olive);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         /* ============================================
