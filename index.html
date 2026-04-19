@@ -720,6 +720,105 @@
         }
 
         /* ============================================
+           VERTICAL TOGGLE (PROJECTS / STUDIO)
+           ============================================ */
+        .vertical-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .vertical-toggle::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .vertical-btn {
+            background: none;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.4s ease;
+        }
+
+        .vertical-btn:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .vertical-btn.active {
+            color: #ffffff;
+        }
+
+        .vertical-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--color-olive);
+            z-index: 1;
+        }
+
+        .vertical-label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 0.3rem;
+            text-transform: none;
+        }
+
+        .vertical-btn.active .vertical-label {
+            color: var(--color-olive);
+        }
+
+        .service-panel {
+            display: none;
+        }
+
+        .service-panel.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Light mode */
+        body.light-mode .vertical-toggle::after {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        body.light-mode .vertical-btn {
+            color: rgba(0, 0, 0, 0.25);
+        }
+        body.light-mode .vertical-btn:hover {
+            color: rgba(0, 0, 0, 0.5);
+        }
+        body.light-mode .vertical-btn.active {
+            color: #0a0a0a;
+        }
+        body.light-mode .vertical-label {
+            color: rgba(0, 0, 0, 0.15);
+        }
+        body.light-mode .vertical-btn.active .vertical-label {
+            color: var(--color-olive);
+        }
+
+        /* ============================================
            SERVICES SECTION
            ============================================ */
         .services {
@@ -2283,7 +2382,21 @@
             <h2>Lo Que Construimos</h2>
             <div class="header-underline"></div>
         </div>
-        <div class="service-grid">
+
+        <!-- VERTICAL TOGGLE -->
+        <div class="vertical-toggle">
+            <button class="vertical-btn active" data-panel="projects">
+                LAZO Projects
+                <span class="vertical-label">Desarrollo de negocios</span>
+            </button>
+            <button class="vertical-btn" data-panel="studio">
+                LAZO Studio
+                <span class="vertical-label">Crecimiento & tecnología</span>
+            </button>
+        </div>
+
+        <!-- PANEL: LAZO PROJECTS -->
+        <div class="service-grid service-panel active" id="panel-projects">
             <div class="service-item shimmer-border">
                 <div class="service-number">01</div>
                 <div class="service-content">
@@ -2313,6 +2426,42 @@
                 <div class="service-content">
                     <h3>ROADMAP DE EJECUCIÓN</h3>
                     <p>Plan de lanzamiento fase por fase con hitos, asignación de recursos y mitigación de riesgos. Del plan a la realidad.</p>
+                    <div class="service-price">Cotización personalizada</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: LAZO STUDIO -->
+        <div class="service-grid service-panel" id="panel-studio">
+            <div class="service-item shimmer-border">
+                <div class="service-number">01</div>
+                <div class="service-content">
+                    <h3>CONTENIDO & REDES SOCIALES</h3>
+                    <p>Estrategia de contenido, calendarios editoriales, guiones de reels, carruseles y gestión de redes. Contenido que conecta y convierte.</p>
+                    <div class="service-price">Cotización personalizada</div>
+                </div>
+            </div>
+            <div class="service-item shimmer-border">
+                <div class="service-number">02</div>
+                <div class="service-content">
+                    <h3>ESTRATEGIA COMERCIAL</h3>
+                    <p>Funnels de venta, CRM, automatizaciones, prospección y secuencias de email. Sistemas que convierten leads en clientes de forma predecible.</p>
+                    <div class="service-price">Cotización personalizada</div>
+                </div>
+            </div>
+            <div class="service-item shimmer-border">
+                <div class="service-number">03</div>
+                <div class="service-content">
+                    <h3>DESARROLLO WEB & SOFTWARE</h3>
+                    <p>Landing pages, aplicaciones web, plataformas digitales y e-commerce. Tecnología a la medida que impulsa tu operación.</p>
+                    <div class="service-price">Cotización personalizada</div>
+                </div>
+            </div>
+            <div class="service-item shimmer-border">
+                <div class="service-number">04</div>
+                <div class="service-content">
+                    <h3>BRANDING & DISEÑO</h3>
+                    <p>Identidad visual, logotipos, materiales de marca, pitch decks y presentaciones. La imagen que tu negocio merece.</p>
                     <div class="service-price">Cotización personalizada</div>
                 </div>
             </div>
@@ -2822,6 +2971,30 @@
                     toggleActions: 'play none none none'
                 },
                 ease: 'power2.out'
+            });
+        });
+
+        /* ============================================
+           VERTICAL TOGGLE (PROJECTS / STUDIO)
+           ============================================ */
+        document.querySelectorAll('.vertical-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Toggle active button
+                document.querySelectorAll('.vertical-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Toggle panel
+                const panelId = 'panel-' + btn.dataset.panel;
+                document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+                const panel = document.getElementById(panelId);
+                panel.classList.add('active');
+                // Animate items in
+                const items = panel.querySelectorAll('.service-item');
+                items.forEach((item, i) => {
+                    gsap.fromTo(item,
+                        { opacity: 0, y: 30 },
+                        { opacity: 1, y: 0, duration: 0.5, delay: i * 0.1, ease: 'power2.out' }
+                    );
+                });
             });
         });
 
