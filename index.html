@@ -2441,8 +2441,19 @@
                 document.querySelectorAll('.vertical-btn').forEach(function(b){ b.classList.remove('active'); });
                 btn.classList.add('active');
                 var panelId = 'panel-' + btn.getAttribute('data-panel');
-                document.querySelectorAll('.service-panel').forEach(function(p){ p.classList.remove('active'); });
-                document.getElementById(panelId).classList.add('active');
+                // Hide all panels and clear inline styles
+                document.querySelectorAll('.service-panel').forEach(function(p){
+                    p.classList.remove('active');
+                    p.style.display = 'none';
+                });
+                // Show selected panel
+                var panel = document.getElementById(panelId);
+                panel.classList.add('active');
+                panel.style.display = '';
+                // Clear any inline styles on items from GSAP
+                panel.querySelectorAll('.service-item').forEach(function(item){
+                    item.removeAttribute('style');
+                });
             });
         });
         </script>
